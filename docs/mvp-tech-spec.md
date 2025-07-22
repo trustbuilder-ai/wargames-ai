@@ -5,7 +5,7 @@
 <br>
 <br>
 
-### <ins>Technical Requirements</ins>
+### <ins>Technical Requirement Outline Draft</ins>
 
 - **Business account(s)** on cloud platform.
 
