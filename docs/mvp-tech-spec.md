@@ -26,6 +26,7 @@
    
 <br>
 <br>
+
 ### <ins>Candidate Tech Stack</ins>
 
 #### Administration and Company Credentials
