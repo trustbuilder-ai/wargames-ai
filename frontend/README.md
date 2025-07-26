@@ -4,68 +4,35 @@ Modern, interactive API documentation for the TrustBuilder Wargames AI server.
 
 ## 🚀 Quick Start
 
-```bash
-# Install dependencies
-pnpm install
+| Command | Description |
+|---------|-------------|
+| `pnpm install` | Install dependencies |
+| `pnpm run dev` | Start development server |
+| `pnpm run build` | Build for production to dist/ |
+| `pnpm run preview` | Preview production build |
+| `pnpm run lint` | Run linting |
+| `pnpm run format` | Format code |
 
-# Start development server
-pnpm run dev
+## Appearance
 
-# Build for production
-pnpm run build
-
-# Preview production build
-pnpm run preview
-```
-
-## 📋 Prerequisites
-
-- Node.js 18+
-- pnpm 8+
-
-## 🛠️ Development
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start dev server with hot reload at localhost:5173
-pnpm run dev
-
-# Run linting
-pnpm run lint
-
-# Format code
-pnpm run format
-```
-
-## 📦 Build & Deploy
-
-```bash
-# Build for production
-pnpm run build
-
-# Preview production build locally
-pnpm run preview
-
-# Output directory: dist/
-```
-
-## 🏗️ Project Structure
-
-```
-frontend/
-├── src/
-│   ├── main.js          # Application entry point
-│   ├── style.css        # Global styles
-│   └── components/      # UI components
-├── public/              # Static assets
-├── index.html           # HTML entry point
-├── vite.config.js       # Vite configuration
-└── package.json         # Dependencies & scripts
-```
+<details>
+  <summary>Cyberphnk Theme</summary>
+  <img src="assets/images/fe_cyberphnk_theme.PNG" alt="Customer Journey" title="Customer Journey" width="60%" />
+</details>
+<details>
+  <summary>Light Theme</summary>
+  <img src="assets/images/fe_light_theme.PNG" alt="Customer Journey" title="Customer Journey" width="60%" />
+</details>
+<details>
+  <summary>Dark Theme</summary>
+  <img src="assets/images/fe_dark_theme.PNG" alt="Customer Journey" title="Customer Journey" width="60%" />
+</details>
 
 ## 🔧 Configuration
+
+### 📋 Prerequisites
+
+- Node.js 18+
 
 ### Environment Variables
 
@@ -104,32 +71,14 @@ export default {
 - **Flowbite** - UI components
 - **Lucide Icons** - Icon library
 
-## 📝 Scripts
+## 🏗️ Project Structure
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm preview` | Preview production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm format` | Format code with Prettier |
-
-## 🚢 Deployment
-
-The built files in `dist/` can be deployed to any static hosting service:
-
-```bash
-# Build
-pnpm run build
-
-# Deploy dist/ folder to:
-# - Vercel
-# - Netlify
-# - GitHub Pages
-# - AWS S3
-# - etc.
 ```
-
-## 📄 License
-
-MIT
+frontend/
+├── public/              # Static assets
+├── src/
+│   └── themes/          # Themes
+├── index.html           # HTML entry point
+├── package.json         # Dependencies & scripts
+└── README.md            # 
+```

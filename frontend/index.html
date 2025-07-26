@@ -19,183 +19,11 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     
-    <style>
-        :root {
-            --background: #0a0a0a;
-            --foreground: #e0e0e0;
-            --card: #111111;
-            --card-foreground: #e0e0e0;
-            --popover: #1a1a1a;
-            --popover-foreground: #e0e0e0;
-            --primary: #00ff88;
-            --primary-foreground: #000000;
-            --secondary: #1e1e1e;
-            --secondary-foreground: #e0e0e0;
-            --muted: #2a2a2a;
-            --muted-foreground: #888888;
-            --accent: #00ccff;
-            --accent-foreground: #000000;
-            --destructive: #ff0055;
-            --destructive-foreground: #ffffff;
-            --border: #333333;
-            --input: #1a1a1a;
-            --ring: #00ff88;
-            --font-sans: 'Space Mono', 'JetBrains Mono', monospace;
-            --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
-            --radius: 0.25rem;
-            --glow-primary: 0 0 20px rgba(0, 255, 136, 0.6);
-            --glow-accent: 0 0 20px rgba(0, 204, 255, 0.6);
-            --glow-destructive: 0 0 20px rgba(255, 0, 85, 0.6);
-        }
-
-        * {
-            font-family: var(--font-mono) !important;
-            letter-spacing: 0.05em;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--foreground);
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
-        }
-
-        /* Cyberpunk grid background */
-        .cyber-grid {
-            background-image: 
-                linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: -1px -1px;
-        }
-
-        /* Glowing borders */
-        .glow-border {
-            border: 1px solid var(--primary);
-            box-shadow: var(--glow-primary), inset 0 0 10px rgba(0, 255, 136, 0.1);
-        }
-
-        .glow-border-accent {
-            border: 1px solid var(--accent);
-            box-shadow: var(--glow-accent), inset 0 0 10px rgba(0, 204, 255, 0.1);
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--muted);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-            box-shadow: var(--glow-primary);
-        }
-
-        /* Animations */
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes typing {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .typing-cursor::after {
-            content: '|';
-            animation: typing 1s ease-in-out infinite;
-            color: var(--primary);
-        }
-
-        /* Button styles */
-        .cyber-button {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: var(--background);
-            font-weight: 600;
-            padding: 0.5rem 1.5rem;
-            border-radius: var(--radius);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cyber-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--glow-primary);
-        }
-
-        .cyber-button:active {
-            transform: translateY(0);
-        }
-
-        /* Input styles */
-        .cyber-input {
-            background: var(--input);
-            border: 1px solid var(--border);
-            color: var(--foreground);
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius);
-            transition: all 0.3s ease;
-        }
-
-        .cyber-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: var(--glow-primary);
-        }
-
-        /* Card styles */
-        .cyber-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .cyber-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-        }
-
-        .option-button {
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            color: var(--foreground);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius);
-            transition: all 0.3s ease;
-            font-size: 0.875rem;
-        }
-
-        .option-button:hover {
-            border-color: var(--accent);
-            box-shadow: var(--glow-accent);
-            transform: translateY(-1px);
-        }
-
-        .option-button.active {
-            background: var(--primary);
-            color: var(--background);
-            border-color: var(--primary);
-            box-shadow: var(--glow-primary);
-        }
-    </style>
+    <!-- Layout CSS (theme-independent) -->
+    <link rel="stylesheet" href="src/layout.css">
+    
+    <!-- Cyberpunk Theme -->
+    <link rel="stylesheet" href="src/themes/cyberpunk_theme.css" data-theme="cyberpunk">
 </head>
 <body class="min-h-screen cyber-grid">
     <!-- Header -->
@@ -220,9 +48,9 @@
     <main class="container mx-auto px-8 pt-24 pb-16">
         <div class="flex flex-col lg:flex-row gap-12">
             <!-- Left Column: Model Output & User Input -->
-            <div class="flex-1 space-y-10">
+            <div class="flex-1 flex flex-col gap-10">
                 <!-- Model Output -->
-                <div class="cyber-card glow-border">
+                <div class="cyber-card glow-border flex-1">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-semibold text-green-400">MODEL OUTPUT</h2>
                         <button class="text-gray-400 hover:text-green-400 transition-colors">
@@ -283,13 +111,19 @@
                     
                     <!-- Auth Section -->
                     <div class="mb-8">
-                        <h3 class="text-sm font-semibold text-gray-400 mb-4 flex items-center">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-4 flex items-center cursor-pointer hover:text-green-400 transition-colors" onclick="openAuthModal()">
                             <i data-lucide="shield" class="w-4 h-4 mr-2"></i>
                             AUTH
                         </h3>
-                        <div class="space-y-3">
-                            <button class="option-button w-full text-left">Login</button>
-                            <button class="option-button w-full text-left">API Keys</button>
+                        
+                        <!-- Theme Selector -->
+                        <div class="mb-4">
+                            <label class="text-xs text-gray-500 mb-2 block">THEME</label>
+                            <select id="themeSelector" class="cyber-input w-full text-sm" onchange="switchTheme(this.value)">
+                                <option value="cyberpunk">Cyberpunk</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
                         </div>
                     </div>
 
@@ -388,9 +222,121 @@
         </div>
     </footer>
 
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
+        
+        <!-- Modal Content -->
+        <div class="fixed inset-0 flex items-center justify-center p-4" onclick="closeAuthModal()">
+            <div class="cyber-card glow-border w-full max-w-md relative" onclick="event.stopPropagation()">
+                <!-- Close Button -->
+                <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-green-400 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                
+                <!-- Modal Header -->
+                <div class="flex items-center mb-6">
+                    <i data-lucide="shield" class="w-5 h-5 mr-3 text-green-400"></i>
+                    <h2 class="text-xl font-semibold text-green-400">AUTHENTICATION</h2>
+                </div>
+                
+                <!-- Auth Options -->
+                <div class="space-y-4">
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase">Login Options</h3>
+                        <button class="option-button w-full text-left flex items-center">
+                            <i data-lucide="user" class="w-4 h-4 mr-3"></i>
+                            Username/Password
+                        </button>
+                        <button class="option-button w-full text-left flex items-center">
+                            <i data-lucide="github" class="w-4 h-4 mr-3"></i>
+                            GitHub OAuth
+                        </button>
+                        <button class="option-button w-full text-left flex items-center">
+                            <i data-lucide="key" class="w-4 h-4 mr-3"></i>
+                            API Token
+                        </button>
+                    </div>
+                    
+                    <hr class="border-gray-700">
+                    
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase">API Management</h3>
+                        <button class="option-button w-full text-left flex items-center">
+                            <i data-lucide="settings" class="w-4 h-4 mr-3"></i>
+                            Manage API Keys
+                        </button>
+                        <button class="option-button w-full text-left flex items-center">
+                            <i data-lucide="plus" class="w-4 h-4 mr-3"></i>
+                            Generate New Key
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="mt-6 pt-4 border-t border-gray-700">
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>Status: Not Authenticated</span>
+                        <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+
+        // Auth Modal Functions
+        function openAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAuthModal();
+            }
+        });
+
+        // Theme switching functionality
+        function switchTheme(themeName) {
+            // Remove existing theme links
+            const existingThemeLinks = document.querySelectorAll('link[data-theme]');
+            existingThemeLinks.forEach(link => link.remove());
+            
+            // Add new theme link
+            const themeLink = document.createElement('link');
+            themeLink.rel = 'stylesheet';
+            themeLink.setAttribute('data-theme', themeName);
+            
+            if (themeName === 'cyberpunk') {
+                themeLink.href = 'src/themes/cyberpunk_theme.css';
+            } else if (themeName === 'light') {
+                themeLink.href = 'src/themes/light_theme.css';
+            } else if (themeName === 'dark') {
+                themeLink.href = 'src/themes/dark_theme.css';
+            }
+            
+            document.head.appendChild(themeLink);
+            
+            // Store theme preference
+            localStorage.setItem('selectedTheme', themeName);
+        }
+        
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'cyberpunk';
+            document.getElementById('themeSelector').value = savedTheme;
+            switchTheme(savedTheme);
+        });
 
         // Mode toggle
         document.querySelectorAll('.option-button').forEach(button => {

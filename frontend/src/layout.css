@@ -1,0 +1,464 @@
+/* Layout and Structure CSS - Theme Independent */
+
+/* Reset and base layout */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* Grid background pattern */
+.cyber-grid {
+    background-size: 50px 50px;
+    background-position: -1px -1px;
+}
+
+/* Header layout */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+}
+
+header .container {
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+header .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+header .flex > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header .flex > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+header span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Main container layout */
+main {
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+    max-width: 1200px;
+}
+
+main > .flex {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+    main > .flex {
+        flex-direction: row;
+        gap: 3rem;
+    }
+    
+    main > .flex > div:first-child {
+        flex: 1;
+    }
+    
+    main > .flex > div:last-child {
+        width: 24rem;
+    }
+}
+
+/* Left column layout */
+.flex-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Card layout */
+.cyber-card {
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Model output specific layout */
+.cyber-card .flex.items-center.justify-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.cyber-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.cyber-card .bg-black\/50 {
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    min-height: 450px;
+    max-height: 550px;
+    overflow-y: auto;
+    font-size: 0.875rem;
+}
+
+.cyber-card .space-y-4 > * + * {
+    margin-top: 1rem;
+}
+
+.cyber-card .flex.items-start.space-x-3 {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+/* User input layout */
+.cyber-card .space-y-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cyber-card textarea {
+    width: 100%;
+    height: 9rem;
+    resize: none;
+}
+
+.cyber-card .flex.items-center.justify-between:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+.cyber-card .flex.items-center.space-x-3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Right column layout */
+.w-full.lg\\:w-96 {
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .w-full.lg\\:w-96 {
+        width: 24rem;
+    }
+}
+
+.space-y-10 > * + * {
+    margin-top: 2.5rem;
+}
+
+/* Options panel layout */
+.cyber-card h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cyber-card h3 i {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.cyber-card .mb-8 {
+    margin-bottom: 2rem;
+}
+
+.cyber-card .mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.cyber-card .mb-4 {
+    margin-bottom: 1rem;
+}
+
+.cyber-card .space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+
+.cyber-card .grid.grid-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.cyber-card .flex.space-x-3 {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Button layout */
+.cyber-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cyber-button:hover {
+    transform: translateY(-1px);
+}
+
+.cyber-button:active {
+    transform: translateY(0);
+}
+
+.cyber-button.w-full {
+    width: 100%;
+}
+
+.cyber-button .flex.items-center.space-x-2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Input layout */
+.cyber-input {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    border: 1px solid;
+}
+
+.cyber-input:focus {
+    outline: none;
+}
+
+.cyber-input.w-full {
+    width: 100%;
+}
+
+/* Option button layout */
+.option-button {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.option-button:hover {
+    transform: translateY(-1px);
+}
+
+.option-button.w-full {
+    width: 100%;
+}
+
+.option-button.text-left {
+    text-align: left;
+}
+
+.option-button.flex-1 {
+    flex: 1;
+}
+
+.option-button .flex.items-center {
+    display: flex;
+    align-items: center;
+}
+
+.option-button i {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.75rem;
+}
+
+/* Game status layout */
+.space-y-4 > * + * {
+    margin-top: 1rem;
+}
+
+.flex.justify-between.items-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Footer layout */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
+}
+
+footer .container {
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+footer .flex.items-center.justify-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3rem;
+    font-size: 0.75rem;
+}
+
+footer .flex.items-center.space-x-4 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Modal layout */
+#authModal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+}
+
+#authModal.hidden {
+    display: none;
+}
+
+#authModal > div:first-child {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(4px);
+}
+
+#authModal > div:last-child {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+#authModal .cyber-card {
+    width: 100%;
+    max-width: 28rem;
+    position: relative;
+}
+
+#authModal .absolute {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#authModal .flex.items-center.mb-6 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+#authModal .flex.items-center.mb-6 i {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
+}
+
+#authModal .flex.items-center.mb-6 h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+#authModal hr {
+    border: none;
+    height: 1px;
+    margin: 1rem 0;
+}
+
+#authModal .mt-6 {
+    margin-top: 1.5rem;
+}
+
+#authModal .pt-4 {
+    padding-top: 1rem;
+}
+
+#authModal .flex.items-center.justify-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+}
+
+#authModal .w-2.h-2 {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+}
+
+/* Utility classes */
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: typing 1s ease-in-out infinite;
+}
+
+/* Scrollbar layout */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes typing {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}

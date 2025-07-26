@@ -1,0 +1,205 @@
+/* Dark Theme - Colors, Fonts, and Visual Effects Only */
+
+:root {
+    --background: #1a1a1a;
+    --foreground: #ffffff;
+    --card: #2a2a2a;
+    --card-foreground: #ffffff;
+    --popover: #2a2a2a;
+    --popover-foreground: #ffffff;
+    --primary: #ffffff;
+    --primary-foreground: #1a1a1a;
+    --secondary: #3a3a3a;
+    --secondary-foreground: #ffffff;
+    --muted: #404040;
+    --muted-foreground: #a0a0a0;
+    --accent: #4a4a4a;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #404040;
+    --input: #2a2a2a;
+    --ring: #ffffff;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+    --radius: 0.5rem;
+    --glow-primary: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    --glow-accent: 0 0 0 3px rgba(74, 74, 74, 0.3);
+    --glow-destructive: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Font styling */
+* {
+    font-family: var(--font-sans) !important;
+    letter-spacing: normal;
+}
+
+/* Background and colors */
+body {
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    background-image: none !important;
+}
+
+/* Remove grid background for clean dark look */
+.cyber-grid {
+    background-image: none !important;
+    background-color: var(--background) !important;
+}
+
+/* Header colors */
+header {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6, p, span, div {
+    color: var(--foreground) !important;
+}
+
+/* Override gradient text for dark theme */
+.bg-gradient-to-r {
+    background: none !important;
+    color: var(--foreground) !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+/* Dark theme color overrides */
+.text-green-400,
+.text-cyan-400,
+.text-yellow-400 {
+    color: var(--foreground) !important;
+}
+
+.text-gray-400,
+.text-gray-500,
+.text-gray-300 {
+    color: var(--muted-foreground) !important;
+}
+
+/* Status indicators */
+.bg-green-400 {
+    background-color: var(--primary) !important;
+}
+
+/* Dark borders */
+.glow-border {
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+.glow-border-accent {
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+/* Scrollbar colors */
+::-webkit-scrollbar-track {
+    background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Typing cursor color */
+.typing-cursor::after {
+    color: var(--primary);
+}
+
+/* Button colors */
+.cyber-button {
+    background: var(--primary) !important;
+    color: var(--primary-foreground) !important;
+}
+
+.cyber-button:hover {
+    background: var(--accent) !important;
+    color: var(--accent-foreground) !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Input colors */
+.cyber-input {
+    background: var(--input) !important;
+    border-color: var(--border) !important;
+    color: var(--foreground) !important;
+}
+
+.cyber-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: var(--glow-primary) !important;
+}
+
+/* Card colors */
+.cyber-card {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.cyber-card:hover {
+    border-color: var(--accent) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+.cyber-card .bg-black\/50 {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Option button colors */
+.option-button {
+    background: var(--secondary) !important;
+    border-color: var(--border) !important;
+    color: var(--foreground) !important;
+}
+
+.option-button:hover {
+    border-color: var(--accent) !important;
+    background: var(--accent) !important;
+}
+
+.option-button.active {
+    background: var(--primary) !important;
+    color: var(--primary-foreground) !important;
+    border-color: var(--primary) !important;
+    box-shadow: var(--glow-primary) !important;
+}
+
+/* Footer colors */
+footer {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    border-top: 1px solid var(--border) !important;
+}
+
+/* Modal colors */
+#authModal > div:first-child {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+}
+
+#authModal .cyber-card {
+    background: var(--card) !important;
+}
+
+#authModal .absolute {
+    color: var(--muted-foreground) !important;
+}
+
+#authModal .absolute:hover {
+    color: var(--primary) !important;
+}
+
+#authModal hr {
+    background-color: var(--border) !important;
+}
+
+#authModal .w-2.h-2 {
+    background-color: var(--destructive) !important;
+}

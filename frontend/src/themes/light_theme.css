@@ -1,0 +1,202 @@
+/* Light Theme - Colors, Fonts, and Visual Effects Only */
+
+:root {
+    --background: #ffffff;
+    --foreground: #1a1a1a;
+    --card: #ffffff;
+    --card-foreground: #1a1a1a;
+    --popover: #ffffff;
+    --popover-foreground: #1a1a1a;
+    --primary: #1a1a1a;
+    --primary-foreground: #ffffff;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #6b6b6b;
+    --muted: #f8f8f8;
+    --muted-foreground: #8a8a8a;
+    --accent: #2a2a2a;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --border: #e5e5e5;
+    --input: #ffffff;
+    --ring: #1a1a1a;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+    --radius: 0.5rem;
+    --glow-primary: 0 0 0 3px rgba(26, 26, 26, 0.1);
+    --glow-accent: 0 0 0 3px rgba(42, 42, 42, 0.1);
+    --glow-destructive: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Font styling */
+* {
+    font-family: var(--font-sans) !important;
+    letter-spacing: normal;
+}
+
+/* Background and colors */
+body {
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    background-image: none !important;
+}
+
+/* Remove grid background for clean look */
+.cyber-grid {
+    background-image: none !important;
+    background-color: var(--background) !important;
+}
+
+/* Header colors */
+header {
+    background-color: var(--background) !important;
+    border-bottom: 1px solid var(--border) !important;
+    backdrop-filter: none !important;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6, p, span, div {
+    color: var(--foreground) !important;
+}
+
+/* Override gradient text */
+.bg-gradient-to-r {
+    background: none !important;
+    color: var(--foreground) !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+/* Override green/cyan colors */
+.text-green-400,
+.text-cyan-400,
+.text-yellow-400 {
+    color: var(--foreground) !important;
+}
+
+.text-gray-400,
+.text-gray-500,
+.text-gray-300 {
+    color: var(--muted-foreground) !important;
+}
+
+/* Status indicators */
+.bg-green-400 {
+    background-color: var(--primary) !important;
+}
+
+/* Subtle borders */
+.glow-border {
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+.glow-border-accent {
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+/* Scrollbar colors */
+::-webkit-scrollbar-track {
+    background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+}
+
+/* Typing cursor color */
+.typing-cursor::after {
+    color: var(--primary);
+}
+
+/* Button colors */
+.cyber-button {
+    background: var(--primary) !important;
+    color: var(--primary-foreground) !important;
+}
+
+.cyber-button:hover {
+    background: var(--accent) !important;
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2) !important;
+}
+
+/* Input colors */
+.cyber-input {
+    background: var(--input) !important;
+    border-color: var(--border) !important;
+    color: var(--foreground) !important;
+}
+
+.cyber-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: var(--glow-primary) !important;
+}
+
+/* Card colors */
+.cyber-card {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.cyber-card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.08) !important;
+}
+
+.cyber-card .bg-black\/50 {
+    background: var(--muted) !important;
+}
+
+/* Option button colors */
+.option-button {
+    background: var(--secondary) !important;
+    border-color: var(--border) !important;
+    color: var(--foreground) !important;
+}
+
+.option-button:hover {
+    border-color: var(--accent) !important;
+    background: var(--muted) !important;
+}
+
+.option-button.active {
+    background: var(--primary) !important;
+    color: var(--primary-foreground) !important;
+    border-color: var(--primary) !important;
+    box-shadow: var(--glow-primary) !important;
+}
+
+/* Footer colors */
+footer {
+    background-color: var(--background) !important;
+    border-top: 1px solid var(--border) !important;
+    backdrop-filter: none !important;
+}
+
+/* Modal colors */
+#authModal > div:first-child {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#authModal .cyber-card {
+    background: var(--card) !important;
+}
+
+#authModal .absolute {
+    color: var(--muted-foreground) !important;
+}
+
+#authModal .absolute:hover {
+    color: var(--primary) !important;
+}
+
+#authModal hr {
+    background-color: var(--border) !important;
+}
+
+#authModal .w-2.h-2 {
+    background-color: var(--destructive) !important;
+}
