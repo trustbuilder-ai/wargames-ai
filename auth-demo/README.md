@@ -6,6 +6,14 @@ Client generated with command:
 npx @hey-api/openapi-ts   -i ~/Projects/trustbuilder-ai/wargames-ai-backend/openapi.json   -o src/backend_client
 ```
 
+**See contents of test-health-check.ts for simple client use**
+
+Run:
+
+```
+npx tsx test-health-check.ts
+```
+
 ### Environment:
 
 Set `SUPABASE_PUBLIC_ANON_KEY` to supabase anonymous key or add to .env.

@@ -1,0 +1,32 @@
+.page-content {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-content h1 {
+  font-size: 32px;
+  font-weight: 400;
+  color: #202124;
+  margin-bottom: 24px;
+}
+
+.lorem-content {
+  line-height: 1.6;
+}
+
+.lorem-content p {
+  font-size: 14px;
+  color: #3c4043;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 16px;
+  }
+  
+  .page-content h1 {
+    font-size: 24px;
+  }
+}

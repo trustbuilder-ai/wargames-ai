@@ -1,0 +1,59 @@
+Here's the updated directive prompt with the additional requirements:
+
+---
+
+Key things to note about this current project state:
+- The current dependencies installed are:
+dotenv
+@supabase/supabase-js
+@hey-api/openapi-ts
+Key notes:
+- No files are to be added or updated unless are within the auth-demo directory (the current cwd).
+- The package manager in use for this project is pnpm and using pnpm is the only way additional packages should be installed.
+
+What you will do now is create a VERY simple React app adhering to the specification below:
+
+Review these two links for information on building static files from a React project.
+https://github.com/gitname/react-gh-pages
+https://stackoverflow.com/questions/69708281/how-can-i-host-my-react-application-using-github
+
+The end project MUST be fully runnable from github pages and all dependencies are to be considered with respect to that requirement. For instance, use something like HashRouter for simple page routing.
+
+This site is a platform dashboard for a company called Trustbuilder AI. The visual style should be similar to Google Cloud Platform with a hamburger-collapsible sidebar on the left side, and a thin header section at the top with a search bar and login link. If the user is logged in their name is displayed on the right side, and when clicked on a drop down panel containing a link to logout appears. If the user is not logged in there is a "Login / Register" clickable on the right side of the header that when clicked on opens a login modal. This login modal allows the user to input an email for an OTP.
+
+The project should lean heavily on components for UI elements in the src that are then aggregated as needed for different pages for static serving.
+
+This app should interact with no backend servers yet, nor should it submit login info. Instead when the user click on the login modal and submits an email, that email should be logged via console.log but no action taken.
+
+The collapsible left side panel has links to the following:
+Wargames
+Models
+RedTeaming
+
+The content body that is routed to or otherwise appears for each of the links should be simple and clean lorem ipsum text for the moment.
+
+**Additional Requirements:**
+
+**Search Functionality:**
+- The search bar in the header should be functional with instant search capabilities
+- As the user types, it should filter through all available pages (Wargames, Models, RedTeaming) and display matching results in a dropdown below the search bar
+- Clicking on a search result should navigate to that page
+- The search should match against both page titles and a predefined set of keywords for each page (e.g., "war games", "AI models", "red team testing")
+- Display "No results found" when no matches exist
+- The search dropdown should close when clicking outside or when pressing Escape
+
+**Responsive Behavior:**
+- On desktop (>768px): Sidebar starts expanded (250px width), can be collapsed to icon-only view (60px width)
+- On mobile/tablet (≤768px): Sidebar starts collapsed and overlays the content when expanded, with a semi-transparent backdrop
+- Header should remain fixed at the top during scrolling
+- Content area should adapt to sidebar state with smooth transitions
+- Search bar should scale appropriately - full width on mobile, fixed width on desktop
+
+**Breadcrumb Navigation:**
+- Display breadcrumbs below the header and above the main content area
+- Format: "Home > [Current Page Name]" where Home is always clickable
+- Breadcrumbs should update based on the current route
+- Style similar to GCP with chevron separators (>) between items
+- On mobile, breadcrumbs should be horizontally scrollable if they overflow
+
+The visual hierarchy should be: Fixed Header → Breadcrumbs → Main Content, with the collapsible sidebar alongside.

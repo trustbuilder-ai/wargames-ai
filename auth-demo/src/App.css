@@ -1,0 +1,26 @@
+.app {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.main-content {
+  margin-top: 60px;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  min-height: calc(100vh - 60px);
+  background-color: #fff;
+}
+
+.main-content.sidebar-collapsed {
+  margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .main-content.sidebar-collapsed {
+    margin-left: 0;
+  }
+}
