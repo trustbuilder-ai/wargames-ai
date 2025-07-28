@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './LoginModal.css'
+import { auth } from '../lib/supabase'
 
-const LoginModal = ({ onClose, onLogin }) => {
+const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -15,10 +19,27 @@ const LoginModal = ({ onClose, onLogin }) => {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [onClose])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (email.trim()) {
-      onLogin(email)
+    if (!email.trim()) return
+
+    setLoading(true)
+    setError('')
+    setMessage('')
+
+    try {
+      const { error } = await auth.signInWithOtp(email)
+      
+      if (error) throw error
+      
+      setMessage('Check your email for the login link!')
+      setTimeout(() => {
+        onClose()
+      }, 3000)
+    } catch (error) {
+      setError(error.message || 'An error occurred. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -49,9 +70,21 @@ const LoginModal = ({ onClose, onLogin }) => {
             autoFocus
           />
           
-          <button type="submit" className="submit-button">
-            Send OTP
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? 'Sending...' : 'Send OTP'}
           </button>
+
+          {message && (
+            <div className="success-message">
+              {message}
+            </div>
+          )}
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
         </form>
       </div>
     </div>

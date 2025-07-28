@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Wargames from './pages/Wargames'
 import Models from './pages/Models'
 import RedTeaming from './pages/RedTeaming'
+import Callback from './pages/auth/Callback'
 import './App.css'
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/wargames" element={<Wargames />} />
           <Route path="/models" element={<Models />} />
           <Route path="/redteaming" element={<RedTeaming />} />
+          <Route path="/auth/callback" element={<Callback />} />
         </Routes>
       </main>
     </div>

@@ -89,3 +89,28 @@
 .submit-button:hover {
   background-color: #1765cc;
 }
+
+.success-message {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

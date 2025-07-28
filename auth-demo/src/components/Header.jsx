@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import LoginModal from './LoginModal'
 import SearchBar from './SearchBar'
+import { useAuth } from '../hooks/useAuth'
+import { auth } from '../lib/supabase'
 import './Header.css'
 
 const Header = ({ onToggleSidebar }) => {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showUserDropdown, setShowUserDropdown] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userEmail, setUserEmail] = useState('')
   const dropdownRef = useRef(null)
+  const { session } = useAuth()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -21,16 +22,8 @@ const Header = ({ onToggleSidebar }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleLogin = (email) => {
-    console.log('Login attempt with email:', email)
-    setUserEmail(email)
-    setIsLoggedIn(true)
-    setShowLoginModal(false)
-  }
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    setUserEmail('')
+  const handleLogout = async () => {
+    await auth.signOut()
     setShowUserDropdown(false)
   }
 
@@ -51,17 +44,17 @@ const Header = ({ onToggleSidebar }) => {
         </div>
 
         <div className="header-right">
-          {isLoggedIn ? (
+          {session ? (
             <div className="user-menu" ref={dropdownRef}>
               <button
                 className="user-button"
                 onClick={() => setShowUserDropdown(!showUserDropdown)}
               >
-                {userEmail}
+                {session.user.email}
               </button>
               {showUserDropdown && (
                 <div className="user-dropdown">
-                  <button onClick={handleLogout}>Logout</button>
+                  <button onClick={handleLogout}>Log Out</button>
                 </div>
               )}
             </div>
@@ -79,7 +72,6 @@ const Header = ({ onToggleSidebar }) => {
       {showLoginModal && (
         <LoginModal
           onClose={() => setShowLoginModal(false)}
-          onLogin={handleLogin}
         />
       )}
     </>

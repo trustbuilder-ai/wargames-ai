@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"deploy": "pnpm build && gh-pages -d dist"
 	},
 	"dependencies": {
 		"@supabase/supabase-js": "^2.52.1",
@@ -16,10 +17,10 @@
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-router-dom": "^7.7.1",
-		"serve": "^14.2.4",
 		"vite": "^7.0.6"
 	},
 	"devDependencies": {
-		"@hey-api/openapi-ts": "0.80.1"
+		"@hey-api/openapi-ts": "0.80.1",
+		"gh-pages": "^6.3.0"
 	}
 }

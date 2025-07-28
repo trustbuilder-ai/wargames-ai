@@ -1,0 +1,64 @@
+.protected-card {
+  padding: 24px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.protected-card.loading {
+  color: #5f6368;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1a73e8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.lock-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #e8f0fe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: #1a73e8;
+}
+
+.auth-message {
+  font-size: 16px;
+  color: #5f6368;
+  margin-bottom: 16px;
+}
+
+.login-prompt-button {
+  padding: 8px 24px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-prompt-button:hover {
+  background-color: #1765cc;
+}
