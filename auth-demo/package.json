@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"@supabase/supabase-js": "^2.52.1",
+		"dotenv": "^17.2.1"
+	},
+	"devDependencies": {
+		"@hey-api/openapi-ts": "0.80.1"
+	}
+}
