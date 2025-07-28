@@ -1,0 +1,7 @@
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that minimal yet functional and worthy for production.
+
+By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+
+Use icons from lucide-react for logos.
+
+Keep the structure of the project and only introduce complexity, new components, files and folders when necessary. Adhere to best security practices. If you change files, add or update concise appropriate comments to each file, class, method function and so forth to be used for auto-generated documentation like JSDocs.

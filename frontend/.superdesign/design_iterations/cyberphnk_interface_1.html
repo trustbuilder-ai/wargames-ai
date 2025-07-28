@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustBuilder Wargames AI</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Flowbite -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.0.0/dist/flowbite.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <style>
+        :root {
+            --background: #0a0a0a;
+            --foreground: #e0e0e0;
+            --card: #111111;
+            --card-foreground: #e0e0e0;
+            --popover: #1a1a1a;
+            --popover-foreground: #e0e0e0;
+            --primary: #00ff88;
+            --primary-foreground: #000000;
+            --secondary: #1e1e1e;
+            --secondary-foreground: #e0e0e0;
+            --muted: #2a2a2a;
+            --muted-foreground: #888888;
+            --accent: #00ccff;
+            --accent-foreground: #000000;
+            --destructive: #ff0055;
+            --destructive-foreground: #ffffff;
+            --border: #333333;
+            --input: #1a1a1a;
+            --ring: #00ff88;
+            --font-sans: 'Space Mono', 'JetBrains Mono', monospace;
+            --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+            --radius: 0.25rem;
+            --glow-primary: 0 0 20px rgba(0, 255, 136, 0.6);
+            --glow-accent: 0 0 20px rgba(0, 204, 255, 0.6);
+            --glow-destructive: 0 0 20px rgba(255, 0, 85, 0.6);
+        }
+
+        * {
+            font-family: var(--font-mono) !important;
+            letter-spacing: 0.05em;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+        }
+
+        /* Cyberpunk grid background */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: -1px -1px;
+        }
+
+        /* Glowing borders */
+        .glow-border {
+            border: 1px solid var(--primary);
+            box-shadow: var(--glow-primary), inset 0 0 10px rgba(0, 255, 136, 0.1);
+        }
+
+        .glow-border-accent {
+            border: 1px solid var(--accent);
+            box-shadow: var(--glow-accent), inset 0 0 10px rgba(0, 204, 255, 0.1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--muted);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes typing {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: typing 1s ease-in-out infinite;
+            color: var(--primary);
+        }
+
+        /* Button styles */
+        .cyber-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--background);
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-primary);
+        }
+
+        .cyber-button:active {
+            transform: translateY(0);
+        }
+
+        /* Input styles */
+        .cyber-input {
+            background: var(--input);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Card styles */
+        .cyber-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Tab styles */
+        .tab-active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .option-button {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .option-button:hover {
+            border-color: var(--accent);
+            box-shadow: var(--glow-accent);
+            transform: translateY(-1px);
+        }
+
+        .option-button.active {
+            background: var(--primary);
+            color: var(--background);
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+    </style>
+</head>
+<body class="min-h-screen cyber-grid">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+                        WARGAMES-AI
+                    </h1>
+                    <span class="text-xs text-gray-500 uppercase">TrustBuilder</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-400">Connected to: wargames-ai.trb.ai</span>
+                    <div class="w-2 h-2 bg-green-400 rounded-full pulse-glow"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 pt-20 pb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column: Model Output -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="cyber-card glow-border">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold text-green-400">MODEL OUTPUT</h2>
+                        <button class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i data-lucide="maximize-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="bg-black/50 rounded p-4 min-h-[400px] max-h-[600px] overflow-y-auto font-mono text-sm">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-cyan-400">[SYSTEM]</span>
+                                <p class="text-gray-300">Wargames AI initialized. Ready for input.</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="text-green-400">[MODEL]</span>
+                                <p class="text-gray-300">Welcome to TrustBuilder Wargames AI. I'm ready to assist with strategic analysis and game simulations.</p>
+                            </div>
+                            <div class="typing-cursor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Input -->
+                <div class="cyber-card glow-border-accent">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold text-cyan-400">USER INPUT</h2>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Tokens: 0/4096</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <textarea 
+                            class="cyber-input w-full h-32 resize-none"
+                            placeholder="Enter your prompt here..."
+                        ></textarea>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <button class="option-button">
+                                    <i data-lucide="paperclip" class="w-4 h-4"></i>
+                                </button>
+                                <button class="option-button">
+                                    <i data-lucide="mic" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <button class="cyber-button flex items-center space-x-2">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>EXECUTE</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Options -->
+            <div class="space-y-6">
+                <!-- Options Panel -->
+                <div class="cyber-card">
+                    <h2 class="text-lg font-semibold text-green-400 mb-4">OPTIONS</h2>
+                    
+                    <!-- Auth Section -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 flex items-center">
+                            <i data-lucide="shield" class="w-4 h-4 mr-2"></i>
+                            AUTH
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="option-button w-full text-left">Login</button>
+                            <button class="option-button w-full text-left">API Keys</button>
+                        </div>
+                    </div>
+
+                    <!-- Join Game Section -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 flex items-center">
+                            <i data-lucide="gamepad-2" class="w-4 h-4 mr-2"></i>
+                            JOIN GAME
+                        </h3>
+                        <div class="space-y-2">
+                            <input type="text" class="cyber-input w-full text-sm" placeholder="Player Name">
+                            <button class="cyber-button w-full text-sm">JOIN SESSION</button>
+                        </div>
+                    </div>
+
+                    <!-- Tools Section -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 flex items-center">
+                            <i data-lucide="wrench" class="w-4 h-4 mr-2"></i>
+                            TOOLS
+                        </h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="option-button">History</button>
+                            <button class="option-button">Export</button>
+                            <button class="option-button">Settings</button>
+                            <button class="option-button">Help</button>
+                        </div>
+                    </div>
+
+                    <!-- Mode Section -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 flex items-center">
+                            <i data-lucide="toggle-left" class="w-4 h-4 mr-2"></i>
+                            MODE
+                        </h3>
+                        <div class="flex space-x-2">
+                            <button class="option-button active flex-1">Single</button>
+                            <button class="option-button flex-1">Batch</button>
+                        </div>
+                    </div>
+
+                    <!-- Eval Section -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 flex items-center">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4 mr-2"></i>
+                            EVAL
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="option-button w-full text-left">Run Evaluation</button>
+                            <button class="option-button w-full text-left">View Results</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Status -->
+                <div class="cyber-card">
+                    <h2 class="text-lg font-semibold text-cyan-400 mb-4">GAME STATUS</h2>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">State:</span>
+                            <span class="text-green-400">READY</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Players:</span>
+                            <span>0/4</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Round:</span>
+                            <span>-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Score:</span>
+                            <span>0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Status Bar -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-10 text-xs">
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-400">Model: GPT-4</span>
+                    <span class="text-gray-400">|</span>
+                    <span class="text-gray-400">Latency: 42ms</span>
+                    <span class="text-gray-400">|</span>
+                    <span class="text-gray-400">Requests: 127</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-green-400">● ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mode toggle
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.parentElement.classList.contains('flex')) {
+                    this.parentElement.querySelectorAll('.option-button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Send button animation
+        document.querySelector('.cyber-button').addEventListener('click', function() {
+            const textarea = document.querySelector('textarea');
+            const outputDiv = document.querySelector('.space-y-4');
+            
+            if (textarea.value.trim()) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'flex items-start space-x-3';
+                userMessage.innerHTML = `
+                    <span class="text-yellow-400">[USER]</span>
+                    <p class="text-gray-300">${textarea.value}</p>
+                `;
+                outputDiv.insertBefore(userMessage, outputDiv.lastElementChild);
+                
+                // Clear input
+                textarea.value = '';
+                
+                // Simulate response
+                setTimeout(() => {
+                    const modelMessage = document.createElement('div');
+                    modelMessage.className = 'flex items-start space-x-3';
+                    modelMessage.innerHTML = `
+                        <span class="text-green-400">[MODEL]</span>
+                        <p class="text-gray-300">Processing your request...</p>
+                    `;
+                    outputDiv.insertBefore(modelMessage, outputDiv.lastElementChild);
+                    
+                    // Scroll to bottom
+                    outputDiv.parentElement.scrollTop = outputDiv.parentElement.scrollHeight;
+                }, 1000);
+            }
+        });
+
+        // Textarea auto-resize
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+    </script>
+</body>
+</html>

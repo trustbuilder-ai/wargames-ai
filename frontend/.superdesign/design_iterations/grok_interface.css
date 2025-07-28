@@ -1,0 +1,192 @@
+/* Grok Interface Styles */
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.grok-logo {
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+.main-input {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 2rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.main-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.main-input::placeholder {
+    color: #9ca3af;
+}
+
+.speed-selector {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.speed-selector:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.feature-pill {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: #374151;
+}
+
+.feature-pill:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.voice-button {
+    background: #1a1a1a;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.voice-button:hover {
+    background: #374151;
+    transform: scale(1.05);
+}
+
+.auth-button {
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auth-button:hover {
+    background: #374151;
+}
+
+.sign-in-button {
+    background: transparent;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sign-in-button:hover {
+    color: #374151;
+}
+
+.header-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-icon:hover {
+    color: #374151;
+}
+
+.logo-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #1a1a1a;
+}
+
+.input-container {
+    position: relative;
+    max-width: 48rem;
+    width: 100%;
+}
+
+.attach-button {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: all 0.2s ease;
+}
+
+.attach-button:hover {
+    color: #6b7280;
+}
+
+.voice-button-input {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.terms-text {
+    color: #6b7280;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.terms-text a {
+    color: #1a1a1a;
+    text-decoration: underline;
+}
+
+.terms-text a:hover {
+    color: #374151;
+}

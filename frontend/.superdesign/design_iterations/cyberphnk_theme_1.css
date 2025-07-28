@@ -1,0 +1,58 @@
+:root {
+  --background: #0a0a0a;
+  --foreground: #e0e0e0;
+  --card: #111111;
+  --card-foreground: #e0e0e0;
+  --popover: #1a1a1a;
+  --popover-foreground: #e0e0e0;
+  --primary: #00ff88;
+  --primary-foreground: #000000;
+  --secondary: #1e1e1e;
+  --secondary-foreground: #e0e0e0;
+  --muted: #2a2a2a;
+  --muted-foreground: #888888;
+  --accent: #00ccff;
+  --accent-foreground: #000000;
+  --destructive: #ff0055;
+  --destructive-foreground: #ffffff;
+  --border: #333333;
+  --input: #1a1a1a;
+  --ring: #00ff88;
+  --chart-1: #00ff88;
+  --chart-2: #00ccff;
+  --chart-3: #ff00ff;
+  --chart-4: #ffaa00;
+  --chart-5: #ff0055;
+  --sidebar: #0f0f0f;
+  --sidebar-foreground: #e0e0e0;
+  --sidebar-primary: #00ff88;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #00ccff;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #222222;
+  --sidebar-ring: #00ff88;
+  --font-sans: 'Space Mono', 'JetBrains Mono', monospace;
+  --font-serif: 'Space Mono', 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+  --radius: 0.25rem;
+  --shadow-2xs: 0 0 10px rgba(0, 255, 136, 0.1);
+  --shadow-xs: 0 0 15px rgba(0, 255, 136, 0.15);
+  --shadow-sm: 0 0 20px rgba(0, 255, 136, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow: 0 0 25px rgba(0, 255, 136, 0.25), 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 0 30px rgba(0, 255, 136, 0.3), 0 6px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 0 40px rgba(0, 255, 136, 0.35), 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 0 50px rgba(0, 255, 136, 0.4), 0 12px 24px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 0 60px rgba(0, 255, 136, 0.5);
+  --tracking-normal: 0.05em;
+  --spacing: 0.25rem;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Glow effects */
+  --glow-primary: 0 0 20px rgba(0, 255, 136, 0.6);
+  --glow-accent: 0 0 20px rgba(0, 204, 255, 0.6);
+  --glow-destructive: 0 0 20px rgba(255, 0, 85, 0.6);
+}

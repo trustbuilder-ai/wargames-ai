@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustBuilder Wargames AI - Grok Style Interface</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <style>
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+        }
+
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .grok-logo {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .main-input {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 2rem;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .main-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .main-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .speed-selector {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .speed-selector:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .feature-pill {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: #374151;
+        }
+
+        .feature-pill:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .voice-button {
+            background: #1a1a1a;
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .voice-button:hover {
+            background: #374151;
+            transform: scale(1.05);
+        }
+
+        .auth-button {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .auth-button:hover {
+            background: #374151;
+        }
+
+        .sign-in-button {
+            background: transparent;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sign-in-button:hover {
+            color: #374151;
+        }
+
+        .header-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .header-icon:hover {
+            color: #374151;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            color: #1a1a1a;
+        }
+
+        .input-container {
+            position: relative;
+            max-width: 48rem;
+            width: 100%;
+        }
+
+        .attach-button {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #9ca3af;
+            transition: all 0.2s ease;
+        }
+
+        .attach-button:hover {
+            color: #6b7280;
+        }
+
+        .voice-button-input {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .terms-text {
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .terms-text a {
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+
+        .terms-text a:hover {
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="flex items-center justify-between p-6">
+        <div class="flex items-center space-x-3">
+            <i data-lucide="zap" class="logo-icon"></i>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <i data-lucide="menu" class="header-icon"></i>
+            <i data-lucide="settings" class="header-icon"></i>
+            <button class="auth-button">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Sign up
+            </button>
+            <button class="sign-in-button">Sign in</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-6">
+        <!-- Logo -->
+        <div class="text-center mb-16">
+            <div class="flex items-center justify-center mb-4">
+                <i data-lucide="zap" class="w-16 h-16 text-gray-800"></i>
+            </div>
+            <h1 class="grok-logo">Wargames AI</h1>
+        </div>
+
+        <!-- Main Input -->
+        <div class="w-full max-w-4xl mb-8">
+            <div class="input-container mx-auto">
+                <button class="attach-button">
+                    <i data-lucide="paperclip" class="w-5 h-5"></i>
+                </button>
+                <input 
+                    type="text" 
+                    class="main-input w-full pl-12 pr-16" 
+                    placeholder="What strategic scenario would you like to analyze?"
+                />
+                <div class="voice-button-input">
+                    <button class="voice-button">
+                        <i data-lucide="mic" class="w-5 h-5 text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Speed Selector -->
+        <div class="mb-8">
+            <button class="speed-selector">
+                <i data-lucide="zap" class="w-4 h-4"></i>
+                <span>Fast</span>
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <!-- Feature Pills -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-8 max-w-4xl">
+            <button class="feature-pill">
+                <i data-lucide="image" class="w-4 h-4"></i>
+                Create Scenarios
+            </button>
+            <button class="feature-pill">
+                <i data-lucide="search" class="w-4 h-4"></i>
+                Research
+            </button>
+            <button class="feature-pill">
+                <i data-lucide="edit-3" class="w-4 h-4"></i>
+                Edit Strategy
+            </button>
+            <button class="feature-pill">
+                <i data-lucide="newspaper" class="w-4 h-4"></i>
+                Latest Intel
+            </button>
+            <button class="feature-pill">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                <span>Personas</span>
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms-text">
+            By using Wargames AI, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Handle input focus
+        const mainInput = document.querySelector('.main-input');
+        const inputContainer = document.querySelector('.input-container');
+
+        mainInput.addEventListener('focus', () => {
+            inputContainer.style.transform = 'scale(1.02)';
+        });
+
+        mainInput.addEventListener('blur', () => {
+            inputContainer.style.transform = 'scale(1)';
+        });
+
+        // Handle Enter key
+        mainInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && mainInput.value.trim()) {
+                console.log('Processing:', mainInput.value);
+                // Here you would typically send the input to your AI backend
+                mainInput.value = '';
+            }
+        });
+
+        // Handle voice button
+        document.querySelector('.voice-button').addEventListener('click', () => {
+            console.log('Voice input activated');
+            // Here you would implement voice recognition
+        });
+
+        // Handle feature pills
+        document.querySelectorAll('.feature-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const feature = pill.textContent.trim();
+                console.log('Feature selected:', feature);
+                // Here you would implement feature-specific functionality
+            });
+        });
+
+        // Handle speed selector
+        document.querySelector('.speed-selector').addEventListener('click', () => {
+            console.log('Speed selector clicked');
+            // Here you would implement speed selection dropdown
+        });
+
+        // Handle attach button
+        document.querySelector('.attach-button').addEventListener('click', () => {
+            console.log('Attach file clicked');
+            // Here you would implement file attachment
+        });
+
+        // Smooth animations
+        document.querySelectorAll('.feature-pill, .speed-selector').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+            });
+        });
+    </script>
+</body>
+</html>
