@@ -1,0 +1,105 @@
+.data-card {
+  background: rgba(0, 200, 0, 0.05);
+  border: 1px solid rgba(0, 200, 0, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.data-card.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  opacity: 0.7;
+}
+
+.data-card.error {
+  background: rgba(200, 0, 0, 0.05);
+  border-color: rgba(200, 0, 0, 0.3);
+  color: #ff6b6b;
+}
+
+.data-card.empty {
+  text-align: center;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.data-card .loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 200, 0, 0.1);
+  border-top: 3px solid rgba(0, 200, 0, 0.8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Specific styles for different data types */
+.data-card.tournaments-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.data-card.health-banner {
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.data-card.health-banner .status {
+  font-weight: bold;
+}
+
+.data-card.health-banner .status.ok {
+  color: #00c800;
+}
+
+.data-card.health-banner .status.error {
+  color: #ff6b6b;
+}
+
+/* Pagination controls */
+.data-card .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 200, 0, 0.2);
+}
+
+.data-card .pagination button {
+  background: rgba(0, 200, 0, 0.1);
+  border: 1px solid rgba(0, 200, 0, 0.3);
+  color: #00c800;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.data-card .pagination button:hover:not(:disabled) {
+  background: rgba(0, 200, 0, 0.2);
+  border-color: rgba(0, 200, 0, 0.5);
+}
+
+.data-card .pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.data-card .pagination span {
+  color: #00c800;
+  font-weight: bold;
+}

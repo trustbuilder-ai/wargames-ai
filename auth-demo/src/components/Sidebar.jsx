@@ -4,6 +4,7 @@ import './Sidebar.css'
 
 const Sidebar = ({ isCollapsed, isMobile }) => {
   const navItems = [
+    { path: '/dashboard', name: 'Dashboard', icon: '📊' },
     { path: '/wargames', name: 'Wargames', icon: '🎯' },
     { path: '/models', name: 'Models', icon: '🤖' },
     { path: '/redteaming', name: 'RedTeaming', icon: '🛡️' },

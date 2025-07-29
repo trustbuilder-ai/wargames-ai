@@ -10,7 +10,7 @@ export const auth = {
     return await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`
+        emailRedirectTo: `${window.location.origin}/auth-demo/auth/callback`
       }
     })
   },

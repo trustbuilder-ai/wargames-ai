@@ -7,12 +7,19 @@ import Home from './pages/Home'
 import Wargames from './pages/Wargames'
 import Models from './pages/Models'
 import RedTeaming from './pages/RedTeaming'
+import Dashboard from './pages/Dashboard'
 import Callback from './pages/auth/Callback'
+import { setupApiClient } from './lib/api-client'
 import './App.css'
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  // Initialize API client with authentication on app load
+  useEffect(() => {
+    setupApiClient()
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,6 +51,7 @@ function App() {
           <Route path="/wargames" element={<Wargames />} />
           <Route path="/models" element={<Models />} />
           <Route path="/redteaming" element={<RedTeaming />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/auth/callback" element={<Callback />} />
         </Routes>
       </main>
