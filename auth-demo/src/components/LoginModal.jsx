@@ -4,6 +4,8 @@ import { auth } from '../lib/supabase'
 
 const LoginModal = ({ onClose }) => {
   const [email, setEmail] = useState('')
+  const [otp, setOtp] = useState('')
+  const [showOtpInput, setShowOtpInput] = useState(false)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
@@ -32,12 +34,33 @@ const LoginModal = ({ onClose }) => {
       
       if (error) throw error
       
-      setMessage('Check your email for the login link!')
-      setTimeout(() => {
-        onClose()
-      }, 3000)
+      setMessage('Check your email for the 6-digit code!')
+      setShowOtpInput(true)
     } catch (error) {
       setError(error.message || 'An error occurred. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleOtpVerification = async (e) => {
+    e.preventDefault()
+    if (!otp.trim() || otp.length !== 6) return
+
+    setLoading(true)
+    setError('')
+
+    try {
+      const { error } = await auth.verifyOtp(email, otp)
+      
+      if (error) throw error
+      
+      setMessage('Successfully logged in!')
+      setTimeout(() => {
+        onClose()
+      }, 1500)
+    } catch (error) {
+      setError(error.message || 'Invalid code. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -55,37 +78,85 @@ const LoginModal = ({ onClose }) => {
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="login-form">
-          <p className="form-description">
-            Enter your email address to receive a one-time password
-          </p>
-          
-          <input
-            type="email"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="email-input"
-            autoFocus
-          />
-          
-          <button type="submit" className="submit-button" disabled={loading}>
-            {loading ? 'Sending...' : 'Send OTP'}
-          </button>
+        {!showOtpInput ? (
+          <form onSubmit={handleSubmit} className="login-form">
+            <p className="form-description">
+              Enter your email address to receive a one-time password
+            </p>
+            
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="email-input"
+              autoFocus
+            />
+            
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? 'Sending...' : 'Send OTP'}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleOtpVerification} className="login-form">
+            <p className="form-description">
+              Enter the 6-digit code sent to {email}
+            </p>
+            
+            <input
+              type="text"
+              placeholder="000000"
+              value={otp}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '').slice(0, 6)
+                setOtp(value)
+              }}
+              required
+              className="email-input otp-input"
+              autoFocus
+              maxLength={6}
+              style={{ letterSpacing: '0.5em', textAlign: 'center' }}
+            />
+            
+            <button type="submit" className="submit-button" disabled={loading || otp.length !== 6}>
+              {loading ? 'Verifying...' : 'Verify Code'}
+            </button>
+            
+            <button 
+              type="button" 
+              className="resend-button"
+              onClick={() => {
+                setShowOtpInput(false)
+                setOtp('')
+                setMessage('')
+                setError('')
+              }}
+              style={{ 
+                marginTop: '10px', 
+                background: 'none', 
+                border: 'none', 
+                color: '#666', 
+                cursor: 'pointer',
+                textDecoration: 'underline'
+              }}
+            >
+              Use different email
+            </button>
+          </form>
+        )}
 
-          {message && (
-            <div className="success-message">
-              {message}
-            </div>
-          )}
+        {message && (
+          <div className="success-message">
+            {message}
+          </div>
+        )}
 
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
-        </form>
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   )

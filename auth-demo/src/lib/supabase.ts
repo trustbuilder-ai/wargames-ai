@@ -8,10 +8,15 @@ export const supabase = createClient(SUPABASE_URL, supabaseAnonKey)
 export const auth = {
   signInWithOtp: async (email: string) => {
     return await supabase.auth.signInWithOtp({
+      email
+      // Removed emailRedirectTo to send OTP code instead of magic link
+    })
+  },
+  verifyOtp: async (email: string, token: string) => {
+    return await supabase.auth.verifyOtp({
       email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth-demo/auth/callback`
-      }
+      token,
+      type: 'email'
     })
   },
   signOut: async () => await supabase.auth.signOut(),

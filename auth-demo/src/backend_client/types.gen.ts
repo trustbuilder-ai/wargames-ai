@@ -18,34 +18,11 @@ export type Badges = {
  * ChallengeContextResponse
  */
 export type ChallengeContextResponse = {
+    user_challenge_context: UserChallengeContexts;
     /**
-     * Id
+     * Messages
      */
-    id: number;
-    /**
-     * Can Contribute
-     */
-    can_contribute: boolean;
-    /**
-     * Challenge Id
-     */
-    challenge_id: number;
-    /**
-     * Started At
-     */
-    started_at: string;
-    /**
-     * User Id
-     */
-    user_id: number;
-    /**
-     * Letta Agent Id
-     */
-    letta_agent_id?: number | null;
-    /**
-     * Succeeded At
-     */
-    succeeded_at?: string | null;
+    messages?: Array<Message>;
 };
 
 /**
@@ -79,20 +56,6 @@ export type Challenges = {
 };
 
 /**
- * CreateUserRequest
- */
-export type CreateUserRequest = {
-    /**
-     * Email
-     */
-    email: string;
-    /**
-     * Password
-     */
-    password?: string | null;
-};
-
-/**
  * HTTPValidationError
  */
 export type HttpValidationError = {
@@ -100,6 +63,28 @@ export type HttpValidationError = {
      * Detail
      */
     detail?: Array<ValidationError>;
+};
+
+/**
+ * Message
+ */
+export type Message = {
+    /**
+     * Role
+     */
+    role: string;
+    /**
+     * Content
+     */
+    content: string;
+    /**
+     * Is Tool Call
+     */
+    is_tool_call?: boolean;
+    /**
+     * Tool Name
+     */
+    tool_name?: string | null;
 };
 
 /**
@@ -210,29 +195,6 @@ export type ValidationError = {
      * Error Type
      */
     type: string;
-};
-
-export type CreateUserUsersPostData = {
-    body: CreateUserRequest;
-    path?: never;
-    query?: never;
-    url: '/users';
-};
-
-export type CreateUserUsersPostErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type CreateUserUsersPostError = CreateUserUsersPostErrors[keyof CreateUserUsersPostErrors];
-
-export type CreateUserUsersPostResponses = {
-    /**
-     * Successful Response
-     */
-    200: unknown;
 };
 
 export type ListTournamentsTournamentsGetData = {
@@ -434,8 +396,10 @@ export type StartChallengeChallengesChallengeIdStartPostResponses = {
     /**
      * Successful Response
      */
-    200: unknown;
+    200: UserChallengeContexts;
 };
+
+export type StartChallengeChallengesChallengeIdStartPostResponse = StartChallengeChallengesChallengeIdStartPostResponses[keyof StartChallengeChallengesChallengeIdStartPostResponses];
 
 export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostData = {
     body?: never;
