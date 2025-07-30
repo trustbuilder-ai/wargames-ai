@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ProtectedCard } from "../components/ProtectedCard";
 import "./Pages.css";
 
@@ -6,6 +7,42 @@ const Wargames = () => {
   return (
     <div className="page-content">
       <h1>Wargames</h1>
+      
+      {/* Launch Challenge Section */}
+      <div className="launch-section" style={{
+        backgroundColor: '#f8f9fa',
+        padding: '24px',
+        borderRadius: '8px',
+        marginBottom: '32px',
+        border: '1px solid #e0e0e0'
+      }}>
+        <h2 style={{ marginTop: 0, marginBottom: '16px' }}>Wargames AI Challenge</h2>
+        <p style={{ marginBottom: '20px' }}>
+          Enter the Wargames AI Challenge interface - a cyberpunk-themed environment 
+          for strategic analysis and game simulations. Features multiple themes, 
+          real-time model interactions, and advanced evaluation tools.
+        </p>
+        <Link 
+          to="/wargames/challenge" 
+          className="launch-button"
+          style={{
+            display: 'inline-block',
+            padding: '12px 24px',
+            backgroundColor: '#1a73e8',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '4px',
+            fontWeight: '500',
+            fontSize: '16px',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={e => e.target.style.backgroundColor = '#1765cc'}
+          onMouseLeave={e => e.target.style.backgroundColor = '#1a73e8'}
+        >
+          Launch Challenge Interface →
+        </Link>
+      </div>
+
       <div className="lorem-content">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac

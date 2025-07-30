@@ -1,0 +1,120 @@
+/* Wargames Challenge Container */
+.wargames-challenge-container {
+  min-height: 100vh;
+  color: #fff;
+  position: relative;
+}
+
+/* Adjust header positioning to stack below main header */
+.wargames-challenge-container .wargames-header {
+  height: 64px;
+  z-index: 150; /* Lower than main header (200) */
+}
+
+/* Tailwind is loaded via JavaScript in useWargamesScripts hook */
+
+/* Ensure Tailwind styles are scoped */
+.wargames-challenge-container * {
+  /* Reset box-sizing for Tailwind compatibility */
+  box-sizing: border-box;
+}
+
+/* Cyber Card Styles */
+.wargames-challenge-container .cyber-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+
+/* Glow Border Effects */
+.wargames-challenge-container .glow-border {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  border-color: #22c55e;
+}
+
+.wargames-challenge-container .glow-border-accent {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  border-color: #06b6d4;
+}
+
+/* Cyber Input Styles */
+.wargames-challenge-container .cyber-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #374151;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #fff;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.wargames-challenge-container .cyber-input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+/* Cyber Button Styles */
+.wargames-challenge-container .cyber-button {
+  background: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wargames-challenge-container .cyber-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* Option Button Styles */
+.wargames-challenge-container .option-button {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #374151;
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wargames-challenge-container .option-button:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.wargames-challenge-container .option-button.active {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* Typing Cursor Animation */
+.wargames-challenge-container .typing-cursor::after {
+  content: "▋";
+  animation: blink 1s infinite;
+  color: #22c55e;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Pulse Glow Animation */
+.wargames-challenge-container .pulse-glow {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { opacity: 1; box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+  100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}

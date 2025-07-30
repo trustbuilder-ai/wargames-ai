@@ -1,0 +1,193 @@
+/* Cyberpunk Theme for Wargames Challenge */
+.wargames-challenge-container {
+  --wg-background: #0a0a0a;
+  --wg-foreground: #e0e0e0;
+  --wg-card: #111111;
+  --wg-card-foreground: #e0e0e0;
+  --wg-popover: #1a1a1a;
+  --wg-popover-foreground: #e0e0e0;
+  --wg-primary: #00ff88;
+  --wg-primary-foreground: #000000;
+  --wg-secondary: #1e1e1e;
+  --wg-secondary-foreground: #e0e0e0;
+  --wg-muted: #2a2a2a;
+  --wg-muted-foreground: #888888;
+  --wg-accent: #00ccff;
+  --wg-accent-foreground: #000000;
+  --wg-destructive: #ff0055;
+  --wg-destructive-foreground: #ffffff;
+  --wg-border: #333333;
+  --wg-input: #1a1a1a;
+  --wg-ring: #00ff88;
+  --wg-glow-primary: 0 0 20px rgba(0, 255, 136, 0.6);
+  --wg-glow-accent: 0 0 20px rgba(0, 204, 255, 0.6);
+  --wg-glow-destructive: 0 0 20px rgba(255, 0, 85, 0.6);
+  
+  background-color: var(--wg-background);
+  color: var(--wg-foreground);
+  font-family: "Space Mono", "JetBrains Mono", monospace;
+  background-image:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(0, 255, 136, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 204, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 20%,
+      rgba(255, 0, 255, 0.05) 0%,
+      transparent 50%
+    );
+}
+
+/* Cyberpunk grid background */
+.wargames-challenge-container.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(0, 255, 136, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 204, 255, 0.1) 0%,
+      transparent 50%
+    );
+  background-size: 50px 50px, 50px 50px, auto, auto;
+  background-position: -1px -1px, -1px -1px, 0 0, 0 0;
+}
+
+/* Header colors */
+.wargames-challenge-container .wargames-header {
+  background-color: rgba(10, 10, 10, 0.9) !important;
+  border-bottom: 1px solid var(--wg-border) !important;
+}
+
+/* Text colors */
+.wargames-challenge-container .text-green-400 {
+  color: var(--wg-primary) !important;
+}
+
+.wargames-challenge-container .text-cyan-400 {
+  color: var(--wg-accent) !important;
+}
+
+.wargames-challenge-container .text-yellow-400 {
+  color: #ffff00 !important;
+}
+
+.wargames-challenge-container .text-gray-400,
+.wargames-challenge-container .text-gray-500,
+.wargames-challenge-container .text-gray-300 {
+  color: var(--wg-muted-foreground) !important;
+}
+
+/* Override glow borders for theme */
+.wargames-challenge-container .glow-border {
+  border-color: var(--wg-primary) !important;
+  box-shadow:
+    var(--wg-glow-primary),
+    inset 0 0 10px rgba(0, 255, 136, 0.1) !important;
+}
+
+.wargames-challenge-container .glow-border-accent {
+  border-color: var(--wg-accent) !important;
+  box-shadow:
+    var(--wg-glow-accent),
+    inset 0 0 10px rgba(0, 204, 255, 0.1) !important;
+}
+
+/* Cyber card theme override */
+.wargames-challenge-container .cyber-card {
+  background: var(--wg-card) !important;
+  border-color: var(--wg-border) !important;
+}
+
+.wargames-challenge-container .cyber-card:hover {
+  border-color: var(--wg-primary) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.2) !important;
+}
+
+/* Button theme overrides */
+.wargames-challenge-container .cyber-button {
+  background: linear-gradient(
+    135deg,
+    var(--wg-primary) 0%,
+    var(--wg-accent) 100%
+  ) !important;
+  color: var(--wg-background) !important;
+}
+
+.wargames-challenge-container .cyber-button:hover {
+  box-shadow: var(--wg-glow-primary) !important;
+}
+
+/* Input theme overrides */
+.wargames-challenge-container .cyber-input {
+  background: var(--wg-input) !important;
+  border-color: var(--wg-border) !important;
+  color: var(--wg-foreground) !important;
+}
+
+.wargames-challenge-container .cyber-input:focus {
+  border-color: var(--wg-primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2) !important;
+}
+
+/* Option button theme overrides */
+.wargames-challenge-container .option-button {
+  background: var(--wg-secondary) !important;
+  border-color: var(--wg-border) !important;
+  color: var(--wg-foreground) !important;
+}
+
+.wargames-challenge-container .option-button:hover {
+  border-color: var(--wg-accent) !important;
+  color: var(--wg-accent) !important;
+}
+
+.wargames-challenge-container .option-button.active {
+  background: var(--wg-primary) !important;
+  color: var(--wg-background) !important;
+  border-color: var(--wg-primary) !important;
+  box-shadow: var(--wg-glow-primary) !important;
+}
+
+/* Footer theme */
+.wargames-challenge-container footer {
+  background-color: rgba(10, 10, 10, 0.9) !important;
+  border-top: 1px solid var(--wg-border) !important;
+}
+
+/* Status indicators */
+.wargames-challenge-container .bg-green-400 {
+  background-color: var(--wg-primary) !important;
+}
+
+.wargames-challenge-container .bg-red-400 {
+  background-color: var(--wg-destructive) !important;
+}
+
+/* Pulse glow for cyberpunk theme */
+.wargames-challenge-container .pulse-glow {
+  box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+}
+
+/* Gradient text */
+.wargames-challenge-container .bg-gradient-to-r {
+  background: linear-gradient(135deg, var(--wg-primary) 0%, var(--wg-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Typing cursor color */
+.wargames-challenge-container .typing-cursor::after {
+  color: var(--wg-primary);
+  text-shadow: 0 0 5px var(--wg-primary);
+}

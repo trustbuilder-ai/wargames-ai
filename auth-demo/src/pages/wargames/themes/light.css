@@ -1,0 +1,158 @@
+/* Light Theme for Wargames Challenge */
+.wargames-challenge-container {
+  --wg-background: #ffffff;
+  --wg-foreground: #1a1a1a;
+  --wg-card: #ffffff;
+  --wg-card-foreground: #1a1a1a;
+  --wg-popover: #ffffff;
+  --wg-popover-foreground: #1a1a1a;
+  --wg-primary: #1a1a1a;
+  --wg-primary-foreground: #ffffff;
+  --wg-secondary: #f5f5f5;
+  --wg-secondary-foreground: #6b6b6b;
+  --wg-muted: #f8f8f8;
+  --wg-muted-foreground: #8a8a8a;
+  --wg-accent: #2a2a2a;
+  --wg-accent-foreground: #ffffff;
+  --wg-destructive: #dc2626;
+  --wg-destructive-foreground: #ffffff;
+  --wg-border: #e5e5e5;
+  --wg-input: #ffffff;
+  --wg-ring: #1a1a1a;
+  --wg-glow-primary: 0 0 0 3px rgba(26, 26, 26, 0.1);
+  --wg-glow-accent: 0 0 0 3px rgba(42, 42, 42, 0.1);
+  
+  background-color: var(--wg-background);
+  color: var(--wg-foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  background-image: none;
+}
+
+/* Clean grid background */
+.wargames-challenge-container.cyber-grid {
+  background-image: none;
+  background-color: #fafafa;
+}
+
+/* Header colors */
+.wargames-challenge-container .wargames-header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid var(--wg-border) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Text colors */
+.wargames-challenge-container .text-green-400,
+.wargames-challenge-container .text-cyan-400 {
+  color: var(--wg-primary) !important;
+}
+
+.wargames-challenge-container .text-yellow-400 {
+  color: #ca8a04 !important;
+}
+
+.wargames-challenge-container .text-gray-400,
+.wargames-challenge-container .text-gray-500,
+.wargames-challenge-container .text-gray-300 {
+  color: var(--wg-muted-foreground) !important;
+}
+
+/* Simple borders */
+.wargames-challenge-container .glow-border {
+  border: 1px solid var(--wg-border) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.wargames-challenge-container .glow-border-accent {
+  border: 1px solid var(--wg-accent) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Clean card design */
+.wargames-challenge-container .cyber-card {
+  background: var(--wg-card) !important;
+  border: 1px solid var(--wg-border) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.wargames-challenge-container .cyber-card:hover {
+  border-color: var(--wg-accent) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Minimal button design */
+.wargames-challenge-container .cyber-button {
+  background: var(--wg-primary) !important;
+  color: var(--wg-primary-foreground) !important;
+  border: none !important;
+  font-weight: 500;
+}
+
+.wargames-challenge-container .cyber-button:hover {
+  background: var(--wg-accent) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Clean input design */
+.wargames-challenge-container .cyber-input {
+  background: var(--wg-input) !important;
+  border: 1px solid var(--wg-border) !important;
+  color: var(--wg-foreground) !important;
+}
+
+.wargames-challenge-container .cyber-input:focus {
+  border-color: var(--wg-primary) !important;
+  box-shadow: var(--wg-glow-primary) !important;
+}
+
+/* Option button design */
+.wargames-challenge-container .option-button {
+  background: var(--wg-secondary) !important;
+  border: 1px solid var(--wg-border) !important;
+  color: var(--wg-foreground) !important;
+}
+
+.wargames-challenge-container .option-button:hover {
+  background: var(--wg-muted) !important;
+  border-color: var(--wg-accent) !important;
+}
+
+.wargames-challenge-container .option-button.active {
+  background: var(--wg-primary) !important;
+  color: var(--wg-primary-foreground) !important;
+  border-color: var(--wg-primary) !important;
+}
+
+/* Footer design */
+.wargames-challenge-container footer {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid var(--wg-border) !important;
+}
+
+/* Status indicators */
+.wargames-challenge-container .bg-green-400 {
+  background-color: #16a34a !important;
+}
+
+.wargames-challenge-container .bg-red-400 {
+  background-color: var(--wg-destructive) !important;
+}
+
+/* No glow effects */
+.wargames-challenge-container .pulse-glow {
+  animation: none;
+  box-shadow: none;
+}
+
+/* Simple gradient text */
+.wargames-challenge-container .bg-gradient-to-r {
+  background: none;
+  color: var(--wg-primary) !important;
+  font-weight: 600;
+}
+
+/* Typing cursor */
+.wargames-challenge-container .typing-cursor::after {
+  color: var(--wg-primary);
+  text-shadow: none;
+}
