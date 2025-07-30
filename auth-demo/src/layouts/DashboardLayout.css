@@ -1,0 +1,27 @@
+.dashboard-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  margin-top: 60px;
+}
+
+.dashboard-content {
+  flex: 1;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  background-color: #fff;
+  min-height: calc(100vh - 60px);
+}
+
+.dashboard-content.sidebar-collapsed {
+  margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    margin-left: 0;
+  }
+
+  .dashboard-content.sidebar-collapsed {
+    margin-left: 0;
+  }
+}

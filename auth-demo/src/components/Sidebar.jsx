@@ -4,10 +4,10 @@ import "./Sidebar.css";
 
 const Sidebar = ({ isCollapsed, isMobile }) => {
   const navItems = [
-    { path: "/dashboard", name: "Dashboard", icon: "📊" },
-    { path: "/wargames", name: "Wargames", icon: "🎯" },
-    { path: "/models", name: "Models", icon: "🤖" },
-    { path: "/redteaming", name: "RedTeaming", icon: "🛡️" },
+    { path: "/dashboard/dashboard", name: "Dashboard", icon: "📊" },
+    { path: "/dashboard/wargames", name: "Wargames", icon: "🎯" },
+    { path: "/dashboard/models", name: "Models", icon: "🤖" },
+    { path: "/dashboard/redteaming", name: "RedTeaming", icon: "🛡️" },
   ];
 
   return (

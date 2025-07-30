@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import Breadcrumbs from "./components/Breadcrumbs";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import RootLayout from "./layouts/RootLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 import Home from "./pages/Home";
 import Wargames from "./pages/Wargames";
 import Models from "./pages/Models";
@@ -13,50 +12,31 @@ import { setupApiClient } from "./lib/api-client";
 import "./App.css";
 
 function App() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
   // Initialize API client with authentication on app load
   useEffect(() => {
     setupApiClient();
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      if (mobile && !sidebarCollapsed) {
-        setSidebarCollapsed(true);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
-
   return (
     <div className="app">
-      <Header onToggleSidebar={toggleSidebar} />
-      <Sidebar isCollapsed={sidebarCollapsed} isMobile={isMobile} />
-      <main
-        className={`main-content ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}
-      >
-        <Breadcrumbs />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/wargames" element={<Wargames />} />
-          <Route path="/models" element={<Models />} />
-          <Route path="/redteaming" element={<RedTeaming />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+      <Routes>
+        <Route element={<RootLayout />}>
+          {/* Redirect from root to dashboard */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          
+          {/* Dashboard routes with sidebar */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Home />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="wargames" element={<Wargames />} />
+            <Route path="models" element={<Models />} />
+            <Route path="redteaming" element={<RedTeaming />} />
+          </Route>
+          
+          {/* Auth routes without sidebar */}
           <Route path="/auth/callback" element={<Callback />} />
-        </Routes>
-      </main>
+        </Route>
+      </Routes>
     </div>
   );
 }

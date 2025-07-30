@@ -6,9 +6,14 @@ const Breadcrumbs = () => {
   const location = useLocation();
 
   const getPageName = (path) => {
-    switch (path) {
+    // Remove /dashboard prefix for matching
+    const cleanPath = path.replace(/^\/dashboard/, '') || '/';
+    
+    switch (cleanPath) {
       case "/":
         return "Home";
+      case "/dashboard":
+        return "Dashboard";
       case "/wargames":
         return "Wargames";
       case "/models":
@@ -21,11 +26,11 @@ const Breadcrumbs = () => {
   };
 
   const currentPage = getPageName(location.pathname);
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === "/dashboard" || location.pathname === "/dashboard/";
 
   return (
     <nav className="breadcrumbs">
-      <Link to="/" className="breadcrumb-link">
+      <Link to="/dashboard" className="breadcrumb-link">
         Home
       </Link>
       {!isHome && (
