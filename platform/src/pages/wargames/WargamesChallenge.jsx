@@ -174,7 +174,7 @@ const WargamesChallenge = () => {
   return (
     <div className="wargames-challenge-container cyber-grid">
       {/* Wargames Header */}
-      <header className="wargames-header fixed top-[60px] left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-gray-800">
+      <header className="wargames-header fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-gray-800">
         <div className="container mx-auto px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
@@ -195,7 +195,7 @@ const WargamesChallenge = () => {
       </header>
 
       {/* Main Container */}
-      <main className="container mx-auto px-8 pt-[120px] pb-16">
+      <main className="container mx-auto px-8 pt-20 pb-16">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Column: Model Output & User Input */}
           <div className="flex-1 flex flex-col gap-10">

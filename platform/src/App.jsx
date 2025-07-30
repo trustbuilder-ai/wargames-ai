@@ -22,6 +22,7 @@ function App() {
   return (
     <div className="app">
       <Routes>
+        {/* Routes with Header */}
         <Route element={<RootLayout />}>
           {/* Redirect from root to dashboard */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -35,13 +36,13 @@ function App() {
             <Route path="redteaming" element={<RedTeaming />} />
           </Route>
           
-          {/* Wargames routes with minimal layout */}
-          <Route path="/wargames" element={<WargamesLayout />}>
-            <Route path="challenge" element={<WargamesChallenge />} />
-          </Route>
-          
           {/* Auth routes without sidebar */}
           <Route path="/auth/callback" element={<Callback />} />
+        </Route>
+        
+        {/* Wargames routes without Header */}
+        <Route path="/wargames" element={<WargamesLayout />}>
+          <Route path="challenge" element={<WargamesChallenge />} />
         </Route>
       </Routes>
     </div>

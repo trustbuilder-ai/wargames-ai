@@ -1,5 +1,4 @@
 .wargames-layout {
-  min-height: calc(100vh - 60px);
-  margin-top: 60px; /* Account for standard header */
+  min-height: 100vh;
   background-color: #000;
 }
