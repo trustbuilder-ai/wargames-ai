@@ -7,6 +7,7 @@ This document provides a comprehensive overview of the authentication system imp
 ## Architecture
 
 ### Technology Stack
+
 - **Authentication Provider**: Supabase Auth
 - **Authentication Method**: Email OTP (passwordless)
 - **Session Management**: Client-side with React hooks
@@ -16,6 +17,7 @@ This document provides a comprehensive overview of the authentication system imp
 ### Key Components
 
 #### 1. Supabase Configuration
+
 - **Location**: `src/config.ts` and `src/lib/supabase.ts`
 - **Purpose**: Centralized Supabase client initialization and auth wrapper functions
 - **Environment Variables**: Uses `VITE_SUPABASE_PUBLIC_ANON_KEY` for API access
@@ -31,6 +33,7 @@ export const auth = {
 ```
 
 #### 2. Authentication Hook
+
 - **Location**: `src/hooks/useAuth.ts`
 - **Purpose**: Provides reactive session state management
 - **Features**:
@@ -40,10 +43,11 @@ export const auth = {
   - TypeScript support for session types
 
 ```typescript
-const { session, loading } = useAuth()
+const { session, loading } = useAuth();
 ```
 
 #### 3. Login Modal Component
+
 - **Location**: `src/components/LoginModal.jsx`
 - **Purpose**: User interface for email OTP authentication
 - **Features**:
@@ -53,6 +57,7 @@ const { session, loading } = useAuth()
   - Auto-close on successful OTP send
 
 #### 4. Protected Card Component
+
 - **Location**: `src/components/ProtectedCard.jsx`
 - **Purpose**: Wrapper component for content requiring authentication
 - **Features**:
@@ -64,6 +69,7 @@ const { session, loading } = useAuth()
 ## Authentication Flow
 
 ### 1. Login Process
+
 1. User clicks "Login / Register" in the header
 2. Login modal opens with email input
 3. User enters email and submits
@@ -73,6 +79,7 @@ const { session, loading } = useAuth()
 7. User checks email for OTP link
 
 ### 2. OTP Verification
+
 1. User clicks the link in their email
 2. Browser navigates to `/auth/callback` with token parameters
 3. Callback component extracts `token_hash` and `type` from URL
@@ -81,12 +88,14 @@ const { session, loading } = useAuth()
 6. On failure: Error message is displayed with option to return home
 
 ### 3. Session Management
+
 - Sessions are automatically persisted in browser storage
 - `useAuth` hook provides session state throughout the app
 - `onAuthStateChange` listener updates UI in real-time
 - Session refresh is handled automatically by Supabase
 
 ### 4. Logout Process
+
 1. User clicks their email in the header
 2. Dropdown menu appears with "Log Out" option
 3. User clicks "Log Out"
@@ -100,7 +109,7 @@ const { session, loading } = useAuth()
 To protect any component or content that requires authentication:
 
 ```jsx
-import { ProtectedCard } from './components/ProtectedCard'
+import { ProtectedCard } from "./components/ProtectedCard";
 
 function MyProtectedContent() {
   return (
@@ -110,7 +119,7 @@ function MyProtectedContent() {
         <p>This content is only visible to authenticated users</p>
       </div>
     </ProtectedCard>
-  )
+  );
 }
 ```
 
@@ -131,24 +140,25 @@ Note: Role checking logic needs to be implemented based on your user metadata st
 To access the current user session in any component:
 
 ```jsx
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from "../hooks/useAuth";
 
 function MyComponent() {
-  const { session, loading } = useAuth()
-  
-  if (loading) return <div>Loading...</div>
-  
+  const { session, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+
   if (session) {
-    return <div>Welcome, {session.user.email}!</div>
+    return <div>Welcome, {session.user.email}!</div>;
   }
-  
-  return <div>Please log in</div>
+
+  return <div>Please log in</div>;
 }
 ```
 
 ### Environment Setup
 
 1. Create a `.env` file in the project root:
+
 ```env
 VITE_SUPABASE_PUBLIC_ANON_KEY=your-supabase-anon-key
 ```
@@ -171,6 +181,7 @@ VITE_SUPABASE_PUBLIC_ANON_KEY=your-supabase-anon-key
 ## Future Enhancements
 
 ### Potential Improvements
+
 1. **Multi-Factor Authentication**: Add SMS or TOTP as second factor
 2. **Social Login**: Integrate OAuth providers (Google, GitHub, etc.)
 3. **User Profiles**: Extend user metadata with profile information
@@ -179,7 +190,9 @@ VITE_SUPABASE_PUBLIC_ANON_KEY=your-supabase-anon-key
 6. **Remember Me**: Implement persistent sessions option
 
 ### API Integration
+
 When backend APIs are added:
+
 1. Include session token in API requests
 2. Validate tokens server-side
 3. Implement refresh token rotation
@@ -211,6 +224,7 @@ When backend APIs are added:
 ## Maintenance
 
 ### Regular Tasks
+
 1. Monitor Supabase auth logs for suspicious activity
 2. Update Supabase client library regularly
 3. Review and rotate API keys periodically
@@ -218,6 +232,7 @@ When backend APIs are added:
 5. Keep email templates up to date
 
 ### Monitoring
+
 - Track authentication success/failure rates
 - Monitor OTP email delivery rates
 - Set up alerts for authentication errors

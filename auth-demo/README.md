@@ -23,5 +23,3 @@ Set `SUPABASE_PUBLIC_ANON_KEY` to supabase anonymous key or add to .env.
 The backend host (repo: wargames-ai-backend) is running here (as of JULY/27/2025):
 
 `https://wargames-ai-backend-357559285333.us-west1.run.app`
-
-

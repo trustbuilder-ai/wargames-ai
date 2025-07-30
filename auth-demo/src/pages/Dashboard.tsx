@@ -1,38 +1,39 @@
-import React, { useState } from 'react'
-import { useApiData, usePaginatedData } from '../hooks'
-import { ProtectedCard } from '../components/ProtectedCard'
-import { DataCard } from '../components/DataCard'
-import { 
-  healthCheckHealthCheckGet,          // Public: ${BACKEND_URL}/health_check
-  listTournamentsTournamentsGet,      // Public: ${BACKEND_URL}/tournaments
-  getCurrentUserInfoUsersMeGet,       // Protected: ${BACKEND_URL}/users/me
-  listBadgesBadgesGet,               // Protected: ${BACKEND_URL}/badges
-  listChallengesChallengesGet        // Public: ${BACKEND_URL}/challenges
-} from '../backend_client/sdk.gen'
-import type { SelectionFilter } from '../backend_client/types.gen'
-import { BACKEND_URL } from '../config'
-import './Dashboard.css'
+import React, { useState } from "react";
+import { useApiData, usePaginatedData } from "../hooks";
+import { ProtectedCard } from "../components/ProtectedCard";
+import { DataCard } from "../components/DataCard";
+import {
+  healthCheckHealthCheckGet, // Public: ${BACKEND_URL}/health_check
+  listTournamentsTournamentsGet, // Public: ${BACKEND_URL}/tournaments
+  getCurrentUserInfoUsersMeGet, // Protected: ${BACKEND_URL}/users/me
+  listBadgesBadgesGet, // Protected: ${BACKEND_URL}/badges
+  listChallengesChallengesGet, // Public: ${BACKEND_URL}/challenges
+} from "../backend_client/sdk.gen";
+import type { SelectionFilter } from "../backend_client/types.gen";
+import { BACKEND_URL } from "../config";
+import "./Dashboard.css";
 
 export function Dashboard() {
-  const [tournamentFilter, setTournamentFilter] = useState<SelectionFilter>('ACTIVE')
+  const [tournamentFilter, setTournamentFilter] =
+    useState<SelectionFilter>("ACTIVE");
 
   // PUBLIC DATA - No authentication required
-  
+
   // Health check - hits https://wargames-ai-backend-357559285333.us-west1.run.app/health_check
-  const healthStatus = useApiData(healthCheckHealthCheckGet)
+  const healthStatus = useApiData(healthCheckHealthCheckGet);
 
   // Simple public data fetch - hits ${BACKEND_URL}/tournaments
-  const allTournaments = useApiData(listTournamentsTournamentsGet)
+  const allTournaments = useApiData(listTournamentsTournamentsGet);
 
   // Public data with pagination - hits ${BACKEND_URL}/tournaments?page_index=0&count=10
   const paginatedTournaments = usePaginatedData(listTournamentsTournamentsGet, {
     pageSize: 10,
     initialParams: {
       query: {
-        selection_filter: tournamentFilter
-      }
-    }
-  })
+        selection_filter: tournamentFilter,
+      },
+    },
+  });
 
   // Public data with manual parameter control - hits ${BACKEND_URL}/challenges?tournament_id=1&page_index=0&count=20
   const challenges = useApiData(listChallengesChallengesGet, {
@@ -40,27 +41,27 @@ export function Dashboard() {
       query: {
         tournament_id: 1,
         page_index: 0,
-        count: 20
-      }
-    }
-  })
+        count: 20,
+      },
+    },
+  });
 
   // PROTECTED DATA - Requires authentication
-  
+
   // Simple protected data - hits ${BACKEND_URL}/users/me with Authorization header
   const userInfo = useApiData(getCurrentUserInfoUsersMeGet, {
-    requiresAuth: true
-  })
+    requiresAuth: true,
+  });
 
   // Protected data with parameters - hits ${BACKEND_URL}/badges?user_badges_only=true
   const userBadges = useApiData(listBadgesBadgesGet, {
     requiresAuth: true,
     initialParams: {
       query: {
-        user_badges_only: true
-      }
-    }
-  })
+        user_badges_only: true,
+      },
+    },
+  });
 
   // Protected data with pagination - hits ${BACKEND_URL}/badges?user_badges_only=true&page_index=0&count=5
   const paginatedUserBadges = usePaginatedData(listBadgesBadgesGet, {
@@ -68,32 +69,32 @@ export function Dashboard() {
     pageSize: 5,
     initialParams: {
       query: {
-        user_badges_only: true
-      }
-    }
-  })
+        user_badges_only: true,
+      },
+    },
+  });
 
   // Dynamic parameter updates (fully typed!)
   const handleFilterChange = (newFilter: SelectionFilter) => {
-    setTournamentFilter(newFilter)
+    setTournamentFilter(newFilter);
     paginatedTournaments.updateParams({
       query: {
         selection_filter: newFilter, // TypeScript knows this field exists
-        page_index: 0,               // Reset to first page
-        count: 10
-      }
-    })
-  }
+        page_index: 0, // Reset to first page
+        count: 10,
+      },
+    });
+  };
 
   return (
     <div className="dashboard-page">
       <h1>Wargames Dashboard</h1>
-      
+
       {/* API Status Banner */}
       <div className="api-status">
         <DataCard {...healthStatus} className="health-banner">
           {(data) => (
-            <span className={`status ${data.status === 'ok' ? 'ok' : 'error'}`}>
+            <span className={`status ${data.status === "ok" ? "ok" : "error"}`}>
               API Status: {data.status} | Backend: {BACKEND_URL}
             </span>
           )}
@@ -107,11 +108,11 @@ export function Dashboard() {
         {/* Filter controls */}
         <div className="filters">
           <label>Tournament Status:</label>
-          {(['ACTIVE', 'FUTURE', 'PAST'] as const).map(filter => (
-            <button 
+          {(["ACTIVE", "FUTURE", "PAST"] as const).map((filter) => (
+            <button
               key={filter}
               onClick={() => handleFilterChange(filter)}
-              className={tournamentFilter === filter ? 'active' : ''}
+              className={tournamentFilter === filter ? "active" : ""}
             >
               {filter.charAt(0).toUpperCase() + filter.slice(1)}
             </button>
@@ -119,35 +120,46 @@ export function Dashboard() {
         </div>
 
         {/* Paginated public data from ${BACKEND_URL}/tournaments */}
-        <DataCard 
-          {...paginatedTournaments} 
+        <DataCard
+          {...paginatedTournaments}
           title="Tournaments"
           className="tournaments-list"
         >
           {(data) => (
             <>
               <div className="tournament-grid">
-                {data.map(tournament => (
+                {data.map((tournament) => (
                   <div key={tournament.id} className="tournament-item">
                     <h3>{tournament.name}</h3>
-                    <p className="status">Status: <span className={tournament.status}>{tournament.status}</span></p>
-                    <p>Starts: {new Date(tournament.start_date).toLocaleDateString()}</p>
+                    <p className="status">
+                      Status:{" "}
+                      <span className={tournament.status}>
+                        {tournament.status}
+                      </span>
+                    </p>
+                    <p>
+                      Starts:{" "}
+                      {new Date(tournament.start_date).toLocaleDateString()}
+                    </p>
                     {tournament.end_date && (
-                      <p>Ends: {new Date(tournament.end_date).toLocaleDateString()}</p>
+                      <p>
+                        Ends:{" "}
+                        {new Date(tournament.end_date).toLocaleDateString()}
+                      </p>
                     )}
                   </div>
                 ))}
               </div>
-              
+
               <div className="pagination">
-                <button 
+                <button
                   onClick={paginatedTournaments.prevPage}
                   disabled={!paginatedTournaments.hasPrevPage}
                 >
                   Previous
                 </button>
                 <span>Page {paginatedTournaments.currentPage + 1}</span>
-                <button 
+                <button
                   onClick={paginatedTournaments.nextPage}
                   disabled={!paginatedTournaments.hasNextPage}
                 >
@@ -162,7 +174,7 @@ export function Dashboard() {
         <DataCard {...challenges} title="Latest Challenges">
           {(data) => (
             <div className="challenges-list">
-              {data.map(challenge => (
+              {data.map((challenge) => (
                 <div key={challenge.id} className="challenge-item">
                   <h4>{challenge.name}</h4>
                   {challenge.description && <p>{challenge.description}</p>}
@@ -184,9 +196,16 @@ export function Dashboard() {
         <DataCard {...userInfo} title="Account Info">
           {(data) => (
             <div className="user-info">
-              <p><strong>Username:</strong> {data.username}</p>
-              <p><strong>Email:</strong> {data.email}</p>
-              <p><strong>Member since:</strong> {new Date(data.created_at).toLocaleDateString()}</p>
+              <p>
+                <strong>Username:</strong> {data.username}
+              </p>
+              <p>
+                <strong>Email:</strong> {data.email}
+              </p>
+              <p>
+                <strong>Member since:</strong>{" "}
+                {new Date(data.created_at).toLocaleDateString()}
+              </p>
             </div>
           )}
         </DataCard>
@@ -196,27 +215,31 @@ export function Dashboard() {
           {(data) => (
             <>
               <div className="badges-grid">
-                {data.map(badge => (
+                {data.map((badge) => (
                   <div key={badge.id} className="badge-card">
-                    {badge.icon_url && <img src={badge.icon_url} alt={badge.name} />}
+                    {badge.icon_url && (
+                      <img src={badge.icon_url} alt={badge.name} />
+                    )}
                     <h4>{badge.name}</h4>
                     {badge.description && <p>{badge.description}</p>}
                     {badge.earned_at && (
-                      <small>Earned: {new Date(badge.earned_at).toLocaleDateString()}</small>
+                      <small>
+                        Earned: {new Date(badge.earned_at).toLocaleDateString()}
+                      </small>
                     )}
                   </div>
                 ))}
               </div>
-              
+
               <div className="pagination">
-                <button 
+                <button
                   onClick={paginatedUserBadges.prevPage}
                   disabled={!paginatedUserBadges.hasPrevPage}
                 >
                   ←
                 </button>
                 <span>Page {paginatedUserBadges.currentPage + 1}</span>
-                <button 
+                <button
                   onClick={paginatedUserBadges.nextPage}
                   disabled={!paginatedUserBadges.hasNextPage}
                 >
@@ -229,15 +252,15 @@ export function Dashboard() {
 
         {/* Manual parameter control example */}
         <div className="actions">
-          <button 
+          <button
             onClick={() => {
               userBadges.refetch({
                 query: {
                   user_badges_only: true,
                   page_index: 0,
-                  count: 50  // Load more badges
-                }
-              })
+                  count: 50, // Load more badges
+                },
+              });
             }}
             className="load-all-btn"
           >
@@ -246,7 +269,7 @@ export function Dashboard() {
         </div>
       </ProtectedCard>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

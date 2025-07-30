@@ -1,27 +1,27 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import './Breadcrumbs.css'
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./Breadcrumbs.css";
 
 const Breadcrumbs = () => {
-  const location = useLocation()
-  
+  const location = useLocation();
+
   const getPageName = (path) => {
     switch (path) {
-      case '/':
-        return 'Home'
-      case '/wargames':
-        return 'Wargames'
-      case '/models':
-        return 'Models'
-      case '/redteaming':
-        return 'RedTeaming'
+      case "/":
+        return "Home";
+      case "/wargames":
+        return "Wargames";
+      case "/models":
+        return "Models";
+      case "/redteaming":
+        return "RedTeaming";
       default:
-        return 'Page'
+        return "Page";
     }
-  }
+  };
 
-  const currentPage = getPageName(location.pathname)
-  const isHome = location.pathname === '/'
+  const currentPage = getPageName(location.pathname);
+  const isHome = location.pathname === "/";
 
   return (
     <nav className="breadcrumbs">
@@ -35,7 +35,7 @@ const Breadcrumbs = () => {
         </>
       )}
     </nav>
-  )
-}
+  );
+};
 
-export default Breadcrumbs
+export default Breadcrumbs;

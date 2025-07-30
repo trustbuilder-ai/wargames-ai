@@ -5,6 +5,7 @@ This document describes the comprehensive API integration patterns implemented i
 ## Overview
 
 The project implements a type-safe, authentication-aware API integration pattern that:
+
 - Uses generated TypeScript types from OpenAPI specification
 - Handles both public and protected endpoints seamlessly
 - Provides automatic authentication token injection
@@ -26,6 +27,7 @@ src/backend_client/
 ```
 
 Key benefits:
+
 - **Full type inference**: Every API endpoint, parameter, and response is fully typed
 - **IntelliSense support**: IDE autocomplete for all API operations
 - **Compile-time validation**: TypeScript prevents invalid API calls before runtime
@@ -38,21 +40,24 @@ The API client is configured once at application startup:
 export function setupApiClient() {
   // Configure base URL from config
   client.setConfig({
-    baseUrl: BACKEND_URL  // https://wargames-ai-backend-357559285333.us-west1.run.app
-  })
+    baseUrl: BACKEND_URL, // https://wargames-ai-backend-357559285333.us-west1.run.app
+  });
 
   // Set up authentication interceptor
   client.interceptors.request.use(async (request) => {
-    const { data: { session } } = await supabase.auth.getSession()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (session?.access_token) {
-      request.headers.set('Authorization', `Bearer ${session.access_token}`)
+      request.headers.set("Authorization", `Bearer ${session.access_token}`);
     }
-    return request
-  })
+    return request;
+  });
 }
 ```
 
 This ensures:
+
 - All API calls use the configured backend URL
 - Authenticated requests automatically include the Bearer token
 - No manual token management in components
@@ -65,14 +70,15 @@ A single hook handles all API data fetching with full type safety:
 const { data, error, loading, refetch, updateParams } = useApiData(
   sdkFunction,
   {
-    requiresAuth: boolean,    // Declares if authentication is required
-    initialParams: TParams,   // Type-safe initial parameters
-    enabled: boolean         // Control when fetching occurs
-  }
-)
+    requiresAuth: boolean, // Declares if authentication is required
+    initialParams: TParams, // Type-safe initial parameters
+    enabled: boolean, // Control when fetching occurs
+  },
+);
 ```
 
 Features:
+
 - **Automatic type inference**: Response and parameter types are inferred from the SDK function
 - **Authentication coordination**: Waits for auth state before fetching protected data
 - **Dynamic parameters**: Update query/path parameters with type checking
@@ -100,6 +106,7 @@ The `ProtectedCard` component provides authentication-gated UI sections:
 ```
 
 Behavior:
+
 - Shows login prompt when not authenticated
 - Displays loading state during auth check
 - Renders children only when session exists
@@ -149,6 +156,7 @@ const paginatedTournaments = usePaginatedData(listTournamentsTournamentsGet, {
 ```
 
 The hook automatically:
+
 - Manages `page_index` and `count` parameters
 - Provides navigation methods (`nextPage`, `prevPage`, `goToPage`)
 - Calculates `hasNextPage` and `hasPrevPage` states
@@ -163,18 +171,19 @@ Parameters can be updated dynamically with full type checking:
 const handleFilterChange = (newFilter: SelectionFilter) => {
   tournaments.updateParams({
     query: {
-      selection_filter: newFilter,  // Must be 'active' | 'upcoming' | 'completed'
-      page_index: 0,                // TypeScript validates these fields
-      count: 20
-    }
-  })
-}
+      selection_filter: newFilter, // Must be 'active' | 'upcoming' | 'completed'
+      page_index: 0, // TypeScript validates these fields
+      count: 20,
+    },
+  });
+};
 ```
 
 Invalid parameters are caught at compile time:
+
 ```typescript
 // TypeScript Error: 'invalid' is not assignable to type SelectionFilter
-tournaments.updateParams({ query: { selection_filter: 'invalid' } })
+tournaments.updateParams({ query: { selection_filter: "invalid" } });
 ```
 
 ## Complete Example: Mixed Public/Protected Dashboard
@@ -183,7 +192,7 @@ tournaments.updateParams({ query: { selection_filter: 'invalid' } })
 export function Dashboard() {
   // PUBLIC DATA - No authentication required
   const healthStatus = useApiData(healthCheckHealthCheckGet)
-  
+
   const paginatedTournaments = usePaginatedData(listTournamentsTournamentsGet, {
     pageSize: 10,
     initialParams: { query: { selection_filter: 'active' } }
@@ -193,7 +202,7 @@ export function Dashboard() {
   const userInfo = useApiData(getCurrentUserInfoUsersMeGet, {
     requiresAuth: true
   })
-  
+
   const userBadges = usePaginatedData(listBadgesBadgesGet, {
     requiresAuth: true,
     pageSize: 5,
@@ -234,45 +243,48 @@ export function Dashboard() {
 ## Type Safety Benefits
 
 ### 1. Compile-Time Validation
+
 ```typescript
 // ✅ Valid: TypeScript knows these parameters exist
 listChallengesChallengesGet({
   query: {
     tournament_id: 1,
     page_index: 0,
-    count: 20
-  }
-})
+    count: 20,
+  },
+});
 
 // ❌ Error: 'invalid_param' does not exist on type
 listChallengesChallengesGet({
   query: {
-    invalid_param: true  // TypeScript error!
-  }
-})
+    invalid_param: true, // TypeScript error!
+  },
+});
 ```
 
 ### 2. Response Type Inference
+
 ```typescript
 const { data } = useApiData(getTournamentTournamentsTournamentIdGet, {
-  initialParams: { path: { tournament_id: 1 } }
-})
+  initialParams: { path: { tournament_id: 1 } },
+});
 
 // TypeScript knows the exact shape of the response
 if (data) {
-  console.log(data.name)        // ✅ Valid
-  console.log(data.start_date)  // ✅ Valid
-  console.log(data.invalid)     // ❌ TypeScript error!
+  console.log(data.name); // ✅ Valid
+  console.log(data.start_date); // ✅ Valid
+  console.log(data.invalid); // ❌ TypeScript error!
 }
 ```
 
 ### 3. Enum Validation
+
 ```typescript
-type SelectionFilter = 'active' | 'upcoming' | 'completed'
+type SelectionFilter = "active" | "upcoming" | "completed";
 
 // TypeScript ensures only valid values are used
-setFilter('active')     // ✅ Valid
-setFilter('invalid')    // ❌ TypeScript error!
+setFilter("active"); // ✅ Valid
+setFilter("invalid"); // ❌ TypeScript error!
 ```
 
 ## Authentication Flow
@@ -289,27 +301,35 @@ setFilter('invalid')    // ❌ TypeScript error!
 ## Best Practices
 
 ### 1. Use Generated SDK Functions
+
 Always use the generated SDK functions rather than manual API calls:
+
 ```typescript
 // ✅ Good: Type-safe, parameters validated
-const { data } = useApiData(listTournamentsTournamentsGet)
+const { data } = useApiData(listTournamentsTournamentsGet);
 
 // ❌ Bad: No type safety, manual URL construction
-const { data } = useApiData(() => fetch('/tournaments'))
+const { data } = useApiData(() => fetch("/tournaments"));
 ```
 
 ### 2. Leverage Type Inference
+
 Let TypeScript infer types rather than manually annotating:
+
 ```typescript
 // ✅ Good: Types are inferred from SDK
-const { data } = useApiData(getCurrentUserInfoUsersMeGet)
+const { data } = useApiData(getCurrentUserInfoUsersMeGet);
 
 // ❌ Unnecessary: Manual type annotation
-const { data }: { data: UserInfo | null } = useApiData(getCurrentUserInfoUsersMeGet)
+const { data }: { data: UserInfo | null } = useApiData(
+  getCurrentUserInfoUsersMeGet,
+);
 ```
 
 ### 3. Handle All States
+
 Always handle loading, error, and empty states:
+
 ```typescript
 <DataCard {...apiResult} title="Data">
   {(data) => (
@@ -320,17 +340,19 @@ Always handle loading, error, and empty states:
 ```
 
 ### 4. Batch Related Requests
+
 Use multiple hooks for related data that loads independently:
+
 ```typescript
 function TournamentDetails({ id }: { id: number }) {
   const tournament = useApiData(getTournamentTournamentsTournamentIdGet, {
-    initialParams: { path: { tournament_id: id } }
-  })
-  
+    initialParams: { path: { tournament_id: id } },
+  });
+
   const challenges = useApiData(listChallengesChallengesGet, {
-    initialParams: { query: { tournament_id: id } }
-  })
-  
+    initialParams: { query: { tournament_id: id } },
+  });
+
   // Both load in parallel, each with its own loading state
 }
 ```
@@ -338,24 +360,30 @@ function TournamentDetails({ id }: { id: number }) {
 ## Configuration
 
 ### Environment Variables
+
 ```env
 VITE_SUPABASE_URL=your-supabase-url
 VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
 ### Backend URL (`src/config.ts`)
+
 ```typescript
-export const BACKEND_URL = 'https://wargames-ai-backend-357559285333.us-west1.run.app'
+export const BACKEND_URL =
+  "https://wargames-ai-backend-357559285333.us-west1.run.app";
 ```
 
 ### CORS Requirements
+
 The backend must allow requests from your frontend origin:
+
 - Development: `http://localhost:5173`
 - Production: Your deployed frontend URL
 
 ## Summary
 
 This pattern provides:
+
 - **Type safety**: Full TypeScript types from OpenAPI spec to UI
 - **Authentication**: Seamless integration with Supabase auth
 - **Flexibility**: Same patterns work for public and protected data

@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react'
-import LoginModal from './LoginModal'
-import SearchBar from './SearchBar'
-import { useAuth } from '../hooks/useAuth'
-import { auth } from '../lib/supabase'
-import './Header.css'
+import React, { useState, useEffect, useRef } from "react";
+import LoginModal from "./LoginModal";
+import SearchBar from "./SearchBar";
+import { useAuth } from "../hooks/useAuth";
+import { auth } from "../lib/supabase";
+import "./Header.css";
 
 const Header = ({ onToggleSidebar }) => {
-  const [showLoginModal, setShowLoginModal] = useState(false)
-  const [showUserDropdown, setShowUserDropdown] = useState(false)
-  const dropdownRef = useRef(null)
-  const { session } = useAuth()
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const { session } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowUserDropdown(false)
+        setShowUserDropdown(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleLogout = async () => {
-    await auth.signOut()
-    setShowUserDropdown(false)
-  }
+    await auth.signOut();
+    setShowUserDropdown(false);
+  };
 
   return (
     <>
@@ -33,7 +33,12 @@ const Header = ({ onToggleSidebar }) => {
         <div className="header-left">
           <button className="menu-button" onClick={onToggleSidebar}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path
+                d="M3 12h18M3 6h18M3 18h18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
           <span className="logo">Trustbuilder AI</span>
@@ -70,12 +75,10 @@ const Header = ({ onToggleSidebar }) => {
       </header>
 
       {showLoginModal && (
-        <LoginModal
-          onClose={() => setShowLoginModal(false)}
-        />
+        <LoginModal onClose={() => setShowLoginModal(false)} />
       )}
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
