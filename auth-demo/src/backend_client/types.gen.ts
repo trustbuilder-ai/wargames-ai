@@ -4,157 +4,150 @@
  * Badges
  */
 export type Badges = {
-  /**
-   * Id
-   */
-  id?: number | null;
-  /**
-   * Challenge Id
-   */
-  challenge_id: number;
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Challenge Id
+     */
+    challenge_id: number;
 };
 
 /**
  * ChallengeContextResponse
  */
 export type ChallengeContextResponse = {
-  user_challenge_context: UserChallengeContexts;
-  /**
-   * Messages
-   */
-  messages?: Array<Message>;
+    user_challenge_context: UserChallengeContexts;
+    /**
+     * Messages
+     */
+    messages?: Array<Message>;
 };
 
 /**
  * Challenges
  */
 export type Challenges = {
-  /**
-   * Id
-   */
-  id?: number | null;
-  /**
-   * Name
-   */
-  name: string;
-  /**
-   * Tournament Id
-   */
-  tournament_id: number;
-  /**
-   * Description
-   */
-  description?: string | null;
-  /**
-   * Tools Available
-   */
-  tools_available?: string | null;
-  /**
-   * Tool Calls Success Criteria
-   */
-  tool_calls_success_criteria?: string | null;
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Tournament Id
+     */
+    tournament_id: number;
+    /**
+     * Description
+     */
+    description?: string | null;
+    /**
+     * Tools Available
+     */
+    tools_available?: string | null;
+    /**
+     * Tool Calls Success Criteria
+     */
+    tool_calls_success_criteria?: string | null;
 };
 
 /**
  * HTTPValidationError
  */
 export type HttpValidationError = {
-  /**
-   * Detail
-   */
-  detail?: Array<ValidationError>;
+    /**
+     * Detail
+     */
+    detail?: Array<ValidationError>;
 };
+
+/**
+ * LLMRole
+ */
+export type LlmRole = 'user' | 'assistant' | 'model' | 'system' | 'tool' | 'tool_call' | 'tool result' | 'error' | 'unknown role';
 
 /**
  * Message
  */
 export type Message = {
-  /**
-   * Role
-   */
-  role: string;
-  /**
-   * Content
-   */
-  content: string;
-  /**
-   * Is Tool Call
-   */
-  is_tool_call?: boolean;
-  /**
-   * Tool Name
-   */
-  tool_name?: string | null;
+    role: LlmRole;
+    /**
+     * Content
+     */
+    content: string;
+    /**
+     * Tool Name
+     */
+    tool_name?: string | null;
 };
 
 /**
  * SelectionFilter
  */
-export type SelectionFilter =
-  | "PAST"
-  | "ACTIVE"
-  | "FUTURE"
-  | "PAST_AND_ACTIVE"
-  | "ACTIVE_AND_FUTURE";
+export type SelectionFilter = 'PAST' | 'ACTIVE' | 'FUTURE' | 'PAST_AND_ACTIVE' | 'ACTIVE_AND_FUTURE';
 
 /**
  * Tournaments
  */
 export type Tournaments = {
-  /**
-   * Id
-   */
-  id?: number | null;
-  /**
-   * Name
-   */
-  name: string;
-  /**
-   * Start Date
-   */
-  start_date: string;
-  /**
-   * End Date
-   */
-  end_date: string;
-  /**
-   * Description
-   */
-  description?: string | null;
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Start Date
+     */
+    start_date: string;
+    /**
+     * End Date
+     */
+    end_date: string;
+    /**
+     * Description
+     */
+    description?: string | null;
 };
 
 /**
  * UserChallengeContexts
  */
 export type UserChallengeContexts = {
-  /**
-   * Id
-   */
-  id?: number | null;
-  /**
-   * Can Contribute
-   */
-  can_contribute: boolean;
-  /**
-   * Challenge Id
-   */
-  challenge_id: number;
-  /**
-   * Started At
-   */
-  started_at: string;
-  /**
-   * User Id
-   */
-  user_id: number;
-  /**
-   * Letta Agent Id
-   */
-  letta_agent_id?: number | null;
-  /**
-   * Succeeded At
-   */
-  succeeded_at?: string | null;
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Can Contribute
+     */
+    can_contribute: boolean;
+    /**
+     * Challenge Id
+     */
+    challenge_id: number;
+    /**
+     * Started At
+     */
+    started_at: string;
+    /**
+     * User Id
+     */
+    user_id: number;
+    /**
+     * Letta Agent Id
+     */
+    letta_agent_id?: string | null;
+    /**
+     * Succeeded At
+     */
+    succeeded_at?: string | null;
 };
 
 /**
@@ -162,395 +155,391 @@ export type UserChallengeContexts = {
  * Represents a user's information including active tournaments, challenges, and badges.
  */
 export type UserInfo = {
-  /**
-   * User Id
-   */
-  user_id: number;
-  /**
-   * Email
-   */
-  email?: string | null;
-  /**
-   * Active Tournaments
-   */
-  active_tournaments: Array<Tournaments>;
-  /**
-   * Active Challenges
-   */
-  active_challenges: Array<Challenges>;
-  /**
-   * Badges
-   */
-  badges: Array<Badges>;
+    /**
+     * User Id
+     */
+    user_id: number;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Active Tournaments
+     */
+    active_tournaments: Array<Tournaments>;
+    /**
+     * Active Challenges
+     */
+    active_challenges: Array<Challenges>;
+    /**
+     * Badges
+     */
+    badges: Array<Badges>;
 };
 
 /**
  * ValidationError
  */
 export type ValidationError = {
-  /**
-   * Location
-   */
-  loc: Array<string | number>;
-  /**
-   * Message
-   */
-  msg: string;
-  /**
-   * Error Type
-   */
-  type: string;
+    /**
+     * Location
+     */
+    loc: Array<string | number>;
+    /**
+     * Message
+     */
+    msg: string;
+    /**
+     * Error Type
+     */
+    type: string;
 };
 
 export type ListTournamentsTournamentsGetData = {
-  body?: never;
-  path?: never;
-  query?: {
-    selection_filter?: SelectionFilter;
-    /**
-     * Page Index
-     */
-    page_index?: number;
-    /**
-     * Count
-     */
-    count?: number;
-  };
-  url: "/tournaments";
+    body?: never;
+    path?: never;
+    query?: {
+        selection_filter?: SelectionFilter;
+        /**
+         * Page Index
+         */
+        page_index?: number;
+        /**
+         * Count
+         */
+        count?: number;
+    };
+    url: '/tournaments';
 };
 
 export type ListTournamentsTournamentsGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type ListTournamentsTournamentsGetError =
-  ListTournamentsTournamentsGetErrors[keyof ListTournamentsTournamentsGetErrors];
-
-export type ListTournamentsTournamentsGetResponses = {
-  /**
-   * Response List Tournaments Tournaments Get
-   * Successful Response
-   */
-  200: Array<Tournaments>;
-};
-
-export type ListTournamentsTournamentsGetResponse =
-  ListTournamentsTournamentsGetResponses[keyof ListTournamentsTournamentsGetResponses];
-
-export type GetTournamentTournamentsTournamentIdGetData = {
-  body?: never;
-  path: {
-    /**
-     * Tournament Id
-     */
-    tournament_id: number;
-  };
-  query?: never;
-  url: "/tournaments/{tournament_id}";
-};
-
-export type GetTournamentTournamentsTournamentIdGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type GetTournamentTournamentsTournamentIdGetError =
-  GetTournamentTournamentsTournamentIdGetErrors[keyof GetTournamentTournamentsTournamentIdGetErrors];
-
-export type GetTournamentTournamentsTournamentIdGetResponses = {
-  /**
-   * Successful Response
-   */
-  200: Tournaments;
-};
-
-export type GetTournamentTournamentsTournamentIdGetResponse =
-  GetTournamentTournamentsTournamentIdGetResponses[keyof GetTournamentTournamentsTournamentIdGetResponses];
-
-export type ListBadgesBadgesGetData = {
-  body?: never;
-  path?: never;
-  query?: {
-    /**
-     * User Badges Only
-     */
-    user_badges_only?: boolean;
-    /**
-     * Page Index
-     */
-    page_index?: number;
-    /**
-     * Count
-     */
-    count?: number;
-  };
-  url: "/badges";
-};
-
-export type ListBadgesBadgesGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type ListBadgesBadgesGetError =
-  ListBadgesBadgesGetErrors[keyof ListBadgesBadgesGetErrors];
-
-export type ListBadgesBadgesGetResponses = {
-  /**
-   * Response List Badges Badges Get
-   * Successful Response
-   */
-  200: Array<Badges>;
-};
-
-export type ListBadgesBadgesGetResponse =
-  ListBadgesBadgesGetResponses[keyof ListBadgesBadgesGetResponses];
-
-export type GetBadgeBadgesBadgeIdGetData = {
-  body?: never;
-  path: {
-    /**
-     * Badge Id
-     */
-    badge_id: number;
-  };
-  query?: never;
-  url: "/badges/{badge_id}";
-};
-
-export type GetBadgeBadgesBadgeIdGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type GetBadgeBadgesBadgeIdGetError =
-  GetBadgeBadgesBadgeIdGetErrors[keyof GetBadgeBadgesBadgeIdGetErrors];
-
-export type GetBadgeBadgesBadgeIdGetResponses = {
-  /**
-   * Successful Response
-   */
-  200: Badges;
-};
-
-export type GetBadgeBadgesBadgeIdGetResponse =
-  GetBadgeBadgesBadgeIdGetResponses[keyof GetBadgeBadgesBadgeIdGetResponses];
-
-export type ListChallengesChallengesGetData = {
-  body?: never;
-  path?: never;
-  query?: {
-    /**
-     * Tournament Id
-     */
-    tournament_id?: number | null;
-    /**
-     * Page Index
-     */
-    page_index?: number;
-    /**
-     * Count
-     */
-    count?: number;
-  };
-  url: "/challenges";
-};
-
-export type ListChallengesChallengesGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type ListChallengesChallengesGetError =
-  ListChallengesChallengesGetErrors[keyof ListChallengesChallengesGetErrors];
-
-export type ListChallengesChallengesGetResponses = {
-  /**
-   * Response List Challenges Challenges Get
-   * Successful Response
-   */
-  200: Array<Challenges>;
-};
-
-export type ListChallengesChallengesGetResponse =
-  ListChallengesChallengesGetResponses[keyof ListChallengesChallengesGetResponses];
-
-export type StartChallengeChallengesChallengeIdStartPostData = {
-  body?: never;
-  path: {
-    /**
-     * Challenge Id
-     */
-    challenge_id: number;
-  };
-  query?: never;
-  url: "/challenges/{challenge_id}/start";
-};
-
-export type StartChallengeChallengesChallengeIdStartPostErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
-};
-
-export type StartChallengeChallengesChallengeIdStartPostError =
-  StartChallengeChallengesChallengeIdStartPostErrors[keyof StartChallengeChallengesChallengeIdStartPostErrors];
-
-export type StartChallengeChallengesChallengeIdStartPostResponses = {
-  /**
-   * Successful Response
-   */
-  200: UserChallengeContexts;
-};
-
-export type StartChallengeChallengesChallengeIdStartPostResponse =
-  StartChallengeChallengesChallengeIdStartPostResponses[keyof StartChallengeChallengesChallengeIdStartPostResponses];
-
-export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostData =
-  {
-    body?: never;
-    path: {
-      /**
-       * Challenge Id
-       */
-      challenge_id: number;
-    };
-    query: {
-      /**
-       * Message
-       */
-      message: string;
-    };
-    url: "/challenges/{challenge_id}/submit_message";
-  };
-
-export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors =
-  {
     /**
      * Validation Error
      */
     422: HttpValidationError;
-  };
+};
 
-export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostError =
-  SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors[keyof SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors];
+export type ListTournamentsTournamentsGetError = ListTournamentsTournamentsGetErrors[keyof ListTournamentsTournamentsGetErrors];
 
-export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses =
-  {
+export type ListTournamentsTournamentsGetResponses = {
+    /**
+     * Response List Tournaments Tournaments Get
+     * Successful Response
+     */
+    200: Array<Tournaments>;
+};
+
+export type ListTournamentsTournamentsGetResponse = ListTournamentsTournamentsGetResponses[keyof ListTournamentsTournamentsGetResponses];
+
+export type GetTournamentTournamentsTournamentIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Tournament Id
+         */
+        tournament_id: number;
+    };
+    query?: never;
+    url: '/tournaments/{tournament_id}';
+};
+
+export type GetTournamentTournamentsTournamentIdGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTournamentTournamentsTournamentIdGetError = GetTournamentTournamentsTournamentIdGetErrors[keyof GetTournamentTournamentsTournamentIdGetErrors];
+
+export type GetTournamentTournamentsTournamentIdGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: Tournaments;
+};
+
+export type GetTournamentTournamentsTournamentIdGetResponse = GetTournamentTournamentsTournamentIdGetResponses[keyof GetTournamentTournamentsTournamentIdGetResponses];
+
+export type ListBadgesBadgesGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * User Badges Only
+         */
+        user_badges_only?: boolean;
+        /**
+         * Page Index
+         */
+        page_index?: number;
+        /**
+         * Count
+         */
+        count?: number;
+    };
+    url: '/badges';
+};
+
+export type ListBadgesBadgesGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListBadgesBadgesGetError = ListBadgesBadgesGetErrors[keyof ListBadgesBadgesGetErrors];
+
+export type ListBadgesBadgesGetResponses = {
+    /**
+     * Response List Badges Badges Get
+     * Successful Response
+     */
+    200: Array<Badges>;
+};
+
+export type ListBadgesBadgesGetResponse = ListBadgesBadgesGetResponses[keyof ListBadgesBadgesGetResponses];
+
+export type GetBadgeBadgesBadgeIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Badge Id
+         */
+        badge_id: number;
+    };
+    query?: never;
+    url: '/badges/{badge_id}';
+};
+
+export type GetBadgeBadgesBadgeIdGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetBadgeBadgesBadgeIdGetError = GetBadgeBadgesBadgeIdGetErrors[keyof GetBadgeBadgesBadgeIdGetErrors];
+
+export type GetBadgeBadgesBadgeIdGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: Badges;
+};
+
+export type GetBadgeBadgesBadgeIdGetResponse = GetBadgeBadgesBadgeIdGetResponses[keyof GetBadgeBadgesBadgeIdGetResponses];
+
+export type ListChallengesChallengesGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Tournament Id
+         */
+        tournament_id?: number | null;
+        /**
+         * Page Index
+         */
+        page_index?: number;
+        /**
+         * Count
+         */
+        count?: number;
+    };
+    url: '/challenges';
+};
+
+export type ListChallengesChallengesGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListChallengesChallengesGetError = ListChallengesChallengesGetErrors[keyof ListChallengesChallengesGetErrors];
+
+export type ListChallengesChallengesGetResponses = {
+    /**
+     * Response List Challenges Challenges Get
+     * Successful Response
+     */
+    200: Array<Challenges>;
+};
+
+export type ListChallengesChallengesGetResponse = ListChallengesChallengesGetResponses[keyof ListChallengesChallengesGetResponses];
+
+export type StartChallengeChallengesChallengeIdStartPostData = {
+    body?: never;
+    path: {
+        /**
+         * Challenge Id
+         */
+        challenge_id: number;
+    };
+    query?: never;
+    url: '/challenges/{challenge_id}/start';
+};
+
+export type StartChallengeChallengesChallengeIdStartPostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type StartChallengeChallengesChallengeIdStartPostError = StartChallengeChallengesChallengeIdStartPostErrors[keyof StartChallengeChallengesChallengeIdStartPostErrors];
+
+export type StartChallengeChallengesChallengeIdStartPostResponses = {
+    /**
+     * Successful Response
+     */
+    200: UserChallengeContexts;
+};
+
+export type StartChallengeChallengesChallengeIdStartPostResponse = StartChallengeChallengesChallengeIdStartPostResponses[keyof StartChallengeChallengesChallengeIdStartPostResponses];
+
+export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostData = {
+    body?: never;
+    path: {
+        /**
+         * Challenge Id
+         */
+        challenge_id: number;
+    };
+    query: {
+        /**
+         * Message
+         */
+        message: string;
+    };
+    url: '/challenges/{challenge_id}/submit_message';
+};
+
+export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostError = SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors[keyof SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostErrors];
+
+export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses = {
     /**
      * Response Submit Message To Challenge Challenges  Challenge Id  Submit Message Post
      * Successful Response
      */
-    200: UserChallengeContexts | null;
-  };
+    200: ChallengeContextResponse | null;
+};
 
-export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponse =
-  SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses[keyof SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses];
+export type SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponse = SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses[keyof SubmitMessageToChallengeChallengesChallengeIdSubmitMessagePostResponses];
 
 export type JoinTournamentTournamentsTournamentIdJoinPostData = {
-  body?: never;
-  path: {
-    /**
-     * Tournament Id
-     */
-    tournament_id: number;
-  };
-  query?: never;
-  url: "/tournaments/{tournament_id}/join";
+    body?: never;
+    path: {
+        /**
+         * Tournament Id
+         */
+        tournament_id: number;
+    };
+    query?: never;
+    url: '/tournaments/{tournament_id}/join';
 };
 
 export type JoinTournamentTournamentsTournamentIdJoinPostErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
-export type JoinTournamentTournamentsTournamentIdJoinPostError =
-  JoinTournamentTournamentsTournamentIdJoinPostErrors[keyof JoinTournamentTournamentsTournamentIdJoinPostErrors];
+export type JoinTournamentTournamentsTournamentIdJoinPostError = JoinTournamentTournamentsTournamentIdJoinPostErrors[keyof JoinTournamentTournamentsTournamentIdJoinPostErrors];
 
 export type JoinTournamentTournamentsTournamentIdJoinPostResponses = {
-  /**
-   * Successful Response
-   */
-  200: unknown;
+    /**
+     * Successful Response
+     */
+    200: unknown;
 };
 
 export type GetCurrentUserInfoUsersMeGetData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: "/users/me";
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/me';
 };
 
 export type GetCurrentUserInfoUsersMeGetResponses = {
-  /**
-   * Successful Response
-   */
-  200: UserInfo;
+    /**
+     * Successful Response
+     */
+    200: UserInfo;
 };
 
-export type GetCurrentUserInfoUsersMeGetResponse =
-  GetCurrentUserInfoUsersMeGetResponses[keyof GetCurrentUserInfoUsersMeGetResponses];
+export type GetCurrentUserInfoUsersMeGetResponse = GetCurrentUserInfoUsersMeGetResponses[keyof GetCurrentUserInfoUsersMeGetResponses];
 
 export type GetChallengeContextChallengesChallengeIdContextGetData = {
-  body?: never;
-  path: {
-    /**
-     * Challenge Id
-     */
-    challenge_id: number;
-  };
-  query?: never;
-  url: "/challenges/{challenge_id}/context";
+    body?: never;
+    path: {
+        /**
+         * Challenge Id
+         */
+        challenge_id: number;
+    };
+    query?: never;
+    url: '/challenges/{challenge_id}/context';
 };
 
 export type GetChallengeContextChallengesChallengeIdContextGetErrors = {
-  /**
-   * Validation Error
-   */
-  422: HttpValidationError;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
 };
 
-export type GetChallengeContextChallengesChallengeIdContextGetError =
-  GetChallengeContextChallengesChallengeIdContextGetErrors[keyof GetChallengeContextChallengesChallengeIdContextGetErrors];
+export type GetChallengeContextChallengesChallengeIdContextGetError = GetChallengeContextChallengesChallengeIdContextGetErrors[keyof GetChallengeContextChallengesChallengeIdContextGetErrors];
 
 export type GetChallengeContextChallengesChallengeIdContextGetResponses = {
-  /**
-   * Successful Response
-   */
-  200: ChallengeContextResponse;
+    /**
+     * Successful Response
+     */
+    200: ChallengeContextResponse;
 };
 
-export type GetChallengeContextChallengesChallengeIdContextGetResponse =
-  GetChallengeContextChallengesChallengeIdContextGetResponses[keyof GetChallengeContextChallengesChallengeIdContextGetResponses];
+export type GetChallengeContextChallengesChallengeIdContextGetResponse = GetChallengeContextChallengesChallengeIdContextGetResponses[keyof GetChallengeContextChallengesChallengeIdContextGetResponses];
+
+export type GetSampleMessagesSampleMessagesGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/sample_messages';
+};
+
+export type GetSampleMessagesSampleMessagesGetResponses = {
+    /**
+     * Response Get Sample Messages Sample Messages Get
+     * Successful Response
+     */
+    200: Array<Message>;
+};
+
+export type GetSampleMessagesSampleMessagesGetResponse = GetSampleMessagesSampleMessagesGetResponses[keyof GetSampleMessagesSampleMessagesGetResponses];
 
 export type HealthCheckHealthCheckGetData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: "/health_check";
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/health_check';
 };
 
 export type HealthCheckHealthCheckGetResponses = {
-  /**
-   * Successful Response
-   */
-  200: unknown;
+    /**
+     * Successful Response
+     */
+    200: unknown;
 };
 
 export type ClientOptions = {
-  baseUrl: `${string}://${string}` | (string & {});
+    baseUrl: `${string}://${string}` | (string & {});
 };

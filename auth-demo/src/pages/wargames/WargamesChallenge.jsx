@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useApiData } from "../../hooks";
 import { auth } from "../../lib/supabase";
+import { getSampleMessagesSampleMessagesGet } from "../../backend_client/sdk.gen";
 import useWargamesScripts from "./hooks/useWargamesScripts";
 // import GameStatus from "./components/GameStatus";  // Intentionally not displayed
 import ModelOutput from "./components/ModelOutput";
@@ -16,16 +18,35 @@ const WargamesChallenge = () => {
     localStorage.getItem("wargamesTheme") || "cyberpunk"
   );
   const [userInput, setUserInput] = useState("");
-  const [messages, setMessages] = useState([
-    { type: "system", text: "Wargames AI initialized. Ready for input." },
-    { type: "model", text: "Welcome to TrustBuilder Wargames AI. I'm ready to assist with strategic analysis and game simulations." }
-  ]);
   const [gameStatus, setGameStatus] = useState({
     state: "READY",
     players: 0,
     round: "-",
     score: "0.00"
   });
+  
+  // Fetch sample messages from API if authenticated
+  const sampleMessages = useApiData(getSampleMessagesSampleMessagesGet, {
+    requiresAuth: true,
+    enabled: !!session // Only fetch if user is authenticated
+  });
+  
+  // Determine messages based on authentication state
+  const getDisplayMessages = () => {
+    if (!session) {
+      return [{ type: "system", text: "User not authenticated. Unable to proceed." }];
+    }
+    
+    if (sampleMessages.data) {
+      // Transform API messages to match ModelOutput expected format
+      return sampleMessages.data.map(msg => ({
+        type: msg.role,
+        text: msg.content
+      }));
+    }
+    
+    return [];
+  };
   
   // State for JOIN GAME authentication
   const [playerEmail, setPlayerEmail] = useState("");
@@ -64,20 +85,13 @@ const WargamesChallenge = () => {
 
 
   const handleSendMessage = () => {
-    if (userInput.trim()) {
-      // Add user message
-      setMessages(prev => [...prev, { type: "user", text: userInput }]);
-      
-      // Clear input
+    if (userInput.trim() && session) {
+      // For now, just clear the input since we're using read-only API messages
+      // In a real implementation, this would send to a different endpoint
       setUserInput("");
       
-      // Simulate response
-      setTimeout(() => {
-        setMessages(prev => [...prev, { 
-          type: "model", 
-          text: "Processing your request..." 
-        }]);
-      }, 1000);
+      // Could trigger a refresh of messages here if needed
+      // sampleMessages.refetch();
     }
   };
 
@@ -185,7 +199,11 @@ const WargamesChallenge = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Column: Model Output & User Input */}
           <div className="flex-1 flex flex-col gap-10">
-            <ModelOutput messages={messages} />
+            <ModelOutput 
+              messages={getDisplayMessages()} 
+              loading={session && sampleMessages.loading}
+              error={session ? sampleMessages.error : null}
+            />
             
             {/* User Input */}
             <div className="cyber-card glow-border-accent">
